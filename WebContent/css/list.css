@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#dogList {
+	width: 1560px;
+	margin: 150px auto;
+}
+
+.mainimage {
+	width: 350px;
+	height: 200px;
+	margin: 0 20px;
+}
+
+.dogname {
+	text-align: center;
+	width: 200px;
+	margin: 10px auto;
+	font-weight: bold;
+}
+
+.dogbreed {
+	text-align: center;
+	width: 200px;
+	margin: 10px auto 20px auto;
+	font-weight: bold;
+}
+
+.paging {
+	text-align: center;
+}
+
+#emptyDog {
+	text-align: center;
+}
+#insertDog {
+	text-align: center;
+}

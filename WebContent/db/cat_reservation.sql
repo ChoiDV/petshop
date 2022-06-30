@@ -1,0 +1,31 @@
+-- 일반 고양이 예약 테이블
+DROP TABLE CAT_RESERVATION;
+
+CREATE TABLE CAT_RESERVATION(
+    MID REFERENCES MEMBER(MID) NOT NULL,
+    CNUM REFERENCES CAT(CNUM) UNIQUE NOT NULL,
+    CR_DATE DATE NOT NULL
+);
+
+COMMIT;
+
+-- 고양이 예약하기 
+INSERT INTO CAT_RESERVATION ( MID, CNUM, CR_DATE)
+    VALUES ('aaa', 1, '2022-07-05');
+    
+-- 내 페이지에서 예약확인하기
+SELECT CR.*, C.CNAME,C.CGENDER, C.CBIRTH, C.CPRICE, (SELECT CC.CBREEDNAME FROM CAT CO, CBREED CC WHERE CO.CBREEDNO = CC.CBREEDNO) CBREEDNAME
+    FROM CAT_RESERVATION CR, CAT C
+     WHERE CR.CNUM = C.CNUM
+         AND MID='aaa';
+         
+-- 예약일 변경하기
+UPDATE CAT_RESERVATION SET CR_DATE = '2022-08-12'
+                            WHERE MID='aaa'
+                                AND CNUM=1;
+                            
+-- 예약 취소하기
+DELETE CAT_RESERVATION WHERE MID='aaa'
+                                AND CNUM=1;
+
+commit;

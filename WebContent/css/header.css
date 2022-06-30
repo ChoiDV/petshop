@@ -1,0 +1,162 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	list-style: none;
+}
+
+a {
+	color: black;
+}
+
+header {
+	width: 1600px;
+	margin: 0 auto;
+}
+
+header #gnb {
+	overflow: hidden;
+	width: 1600px;
+	margin: 10px auto;
+}
+
+header #gnb #right_gnb {
+	float: right;
+}
+
+header #gnb #right_gnb ul li {
+	float: right;
+	margin: 20px;
+}
+
+header #gnb #left_gnb ul {
+	float: left;
+}
+
+header #gnb #left_gnb ul li {
+	height: 150px;
+	line-height: 150px;
+	margin-left: 50px;
+}
+
+header #gnb #left_gnb ul li input[name="search"] {
+	width: 100px;
+	border: none;
+	border-bottom: 1px solid black;
+	outline: none;
+	cursor: pointer;
+}
+
+header #logo {
+	text-align: center;
+	width: 300px;
+	height: 150px;
+	margin: 0 auto;
+	line-height: 150px;
+	cursor: pointer;
+}
+
+header #lnb {
+	height: 80px;
+	position: relative;
+}
+/* subMenu  hove           */
+header #lnb ul li .subMenu {
+	display: none;
+	overflow: hidden;
+	float: left;
+}
+
+header #lnb ul li:hover .subMenu {
+	display: block;
+	float: left;
+	cursor: pointer;
+}
+
+header #lnb ul li .subMenuBoard {
+	display: none;
+	overflow: hidden;
+	float: left;
+}
+
+header #lnb ul li:hover .subMenuBoard {
+	display: block;
+	float: left;
+	cursor: pointer;
+}
+
+/*   ----------------------------    */
+header #lnb {
+	width: 1600px;
+	margin: 0 auto;
+	height: 80px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+header #lnb ul li {
+	width: 320px;
+	box-sizing: border-box;
+	text-align: center;
+	height: 80px;
+	line-height: 80px;
+	float: left;
+	cursor: pointer;	
+}
+
+header #lnb ul li .subMenu {
+	overflow: hidden;
+	width: 1600px;
+	box-sizing: border-box;
+}
+
+header #lnb ul li .subMenuBoard {
+	overflow: hidden;
+	width: 640px;
+	box-sizing: border-box;
+}
+
+header #lnb ul li .subMenuBoard li {
+	width: 320px;
+	margin: 10px;
+	box-sizing: border-box;
+}
+
+header #lnb ul li .subMenu li {
+	float: left;
+	width: 320px;
+	margin: 10px;
+	box-sizing: border-box;
+}
+
+header #lnb ul li .subMenu .text {
+	height: 30px;
+	line-height: 30px;
+	font-size: 0.8em;
+}
+
+header #lnb ul li .subMenuBoard .text {
+	height: 30px;
+	line-height: 30px;
+	font-size: 0.8em;
+}
+
+#lnb {
+	position: relative;
+	border-top: 5px double lightgray;
+	border-bottom: 5px double lightgray;
+}
+
+.subMenu {
+	position: absolute;
+	left: 0;
+	top: 80px;
+}
+
+.subMenuBoard {
+	position: absolute;
+	left: 800px;
+	top: 80px;
+}

@@ -1,0 +1,28 @@
+-- 일반 강아지 예약 테이블
+DROP TABLE DOG_RESERVATION;
+
+CREATE TABLE DOG_RESERVATION(
+    MID REFERENCES MEMBER(MID) NOT NULL,
+    DNUM REFERENCES DOG(DNUM) UNIQUE NOT NULL,
+    DR_DATE DATE NOT NULL
+);
+
+--  예약 하기
+INSERT INTO DOG_RESERVATION ( MID, DNUM, DR_DATE)
+    VALUES ('aaa', 1, '2022-07-05');
+    
+-- 내 페이지에서 예약확인하기
+SELECT DR.*, D.DNAME,D.DGENDER, D.DBIRTH, D.DPRICE, (SELECT DD.DBREEDNAME FROM DOG DO, DBREED DD WHERE DO.DBREEDNO = DD.DBREEDNO) DBREEDNAME
+    FROM DOG_RESERVATION DR, DOG D
+     WHERE DR.DNUM = D.DNUM
+         AND MID='aaa';
+         
+-- 예약일 변경하기
+UPDATE DOG_RESERVATION SET DR_DATE = '2022-08-12'
+                            WHERE MID='aaa'
+                                AND DNUM=1;
+                            
+-- 예약 취소하기
+DELETE DOG_RESERVATION WHERE MID='aaa' 
+                                AND DNUM=1 ;
+

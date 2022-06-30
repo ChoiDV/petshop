@@ -1,0 +1,113 @@
+@charset "UTF-8";
+
+#dogContent_Form {
+	background-color: #ffd1dc;
+	width: 600px;
+	margin: 0 auto;
+	text-align: center;
+	height: 2100px;
+}
+
+#mainContent {
+	width: 500px;
+	margin: 0 auto;
+	background-color: #E2E2E2;
+	border-radius: 50px;
+}
+
+#mainContent th {
+	width: 200px;
+	height: 50px;
+}
+
+#mainContent td {
+	width: 300px;
+	height: 50px;
+	line-height: 50px;
+	padding: 0 10px;
+}
+
+.dogfoot {
+	width: 50px;
+	height: 30px;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+td span, td img {
+	display: block;
+	float: left;
+	margin-left: 70px;
+}
+
+td {
+	overflow: hidden;
+}
+
+.dogimage {
+	text-align: center;
+	margin: 20px auto;
+	width: 500px;
+}
+
+.dogimage img {
+	width: 500px;
+	height: 200px;
+	margin-top: 50px;
+}
+
+#profile {
+	font-weight: bold;
+	font-size: 1.5em;
+	padding-top: 50px;
+}
+
+#profile_eng {
+	font-weight: bold;
+	font-size: 2em;
+	text-shadow: -1px 0 #000;
+}
+
+#CuteDog {
+	font-size: 2em;
+	font-weight: bold;
+	margin: 20px;
+	color: lightgray;
+	text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+}
+
+button {
+	background-color: #ffd1dc;
+	border: none;
+	margin: 10px;
+	font-size: 1.3em;
+	font-weight: bold;
+	color: gray;
+	text-shadow: -1px 0 #000;
+	cursor: pointer;
+}
+
+#bar {
+	width: 600px;
+	margin: 0 auto;
+	border: 1px solid black;
+	background-color: #ffd1dc;
+	text-align: center;
+}
+
+#bar td {
+	border: 1px solid black;
+}
+
+#AllForm {
+	margin-top: 150px;
+}
+#precontent {
+	width: 500px;
+	margin: 20px auto;
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.3em;
+	text-shadow: -1px 0 #fff, -1px 0 #fff;
+}
+
