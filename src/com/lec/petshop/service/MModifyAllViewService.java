@@ -20,13 +20,11 @@ public class MModifyAllViewService implements Service {
 		if(result == MemberDao.LOGIN_SUCCESS) {
 			MemberDto dto = dao.loginSuccess(mid);
 			if(modify.equals("all")) {
-				request.setAttribute("modifyAllResult", dto );
-			} else if(modify.equals("id")) {
-				request.setAttribute("modifyId", dto);
+				request.setAttribute("modifyAll", dto );
 			} else if(modify.equals("pw")) {
 				request.setAttribute("modifyPw", dto);
 			}
-		}
+		} 
 		request.setAttribute("modify", modify);
 	}
 }

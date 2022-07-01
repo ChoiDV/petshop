@@ -44,7 +44,7 @@
 					<c:forEach var="dog" items="${dogList }"> 
 						<td>
 							<a href="${conPath }/DogContentView.do?pageNum=${pageNum }&dnum=${dog.dnum } ">
-								<img src="${conPath }/dogImage/${dog.dimage1 }" class="mainimage" alt="대표사진"  >
+								<img src="${conPath }/DogImageUpFolder/${dog.dimage1 }" class="mainimage" alt="대표사진"  >
 								<div class="dogname">${dog.dname }</div>
 								<div class="dogbreed">${dog.dbreedname }</div>
 							</a>
@@ -58,23 +58,23 @@
 			</c:if>
 		</table>
 		<div class="paging">
-	 	<c:if test="${startPage > BLOCKSIZE}">
-	 		 <a href="${conPath }/DogAllView.do?pageNum=1">&lt;&lt;</a> 
-	 		 <a href="${conPath }/DogAllView.do?pageNum=${startPage-1 }">&lt;</a> 
-	 	</c:if>
-	 	<c:forEach var="i" begin="${startPage }" end="${endPage }">
-	 		<c:if test="${i eq pageNum }">
-	 			[ <b> ${i } </b> ]
-	 		</c:if>
-	 		<c:if test="${i != pageNum }">
-	 			[ <a href="${conPath }/DogAllView.do?pageNum=${i }">${i }</a> ]
-	 		</c:if>
-	 	</c:forEach>
-	 	<c:if test="${endPage < pageCnt }">
-	 		[ <a href="${conPath }/DogAllView.do?pageNum=${endPage+1 }">&gt;</a> ]
-	 		[ <a href="${conPath }/DogAllView.do?pageNum=${pageCnt}">&gt;&gt;</a> ]
-	 	</c:if>
-	 </div> 
+		 	<c:if test="${startPage > BLOCKSIZE}">
+		 		 <a href="${conPath }/DogAllView.do?pageNum=1">&lt;&lt;</a> 
+		 		 <a href="${conPath }/DogAllView.do?pageNum=${startPage-1 }">&lt;</a> 
+		 	</c:if>
+		 	<c:forEach var="i" begin="${startPage }" end="${endPage }">
+		 		<c:if test="${i eq pageNum }">
+		 			[ <b> ${i } </b> ]
+		 		</c:if>
+		 		<c:if test="${i != pageNum }">
+		 			[ <a href="${conPath }/DogAllView.do?pageNum=${i }">${i }</a> ]
+		 		</c:if>
+		 	</c:forEach>
+		 	<c:if test="${endPage < pageCnt }">
+		 		[ <a href="${conPath }/DogAllView.do?pageNum=${endPage+1 }">&gt;</a> ]
+		 		[ <a href="${conPath }/DogAllView.do?pageNum=${pageCnt}">&gt;&gt;</a> ]
+		 	</c:if>
+	 	</div> 
 	<jsp:include page="../main/footer.jsp" />
   </body>
 </html>

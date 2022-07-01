@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
   <title>Insert title here</title>
-  <link href="${conPath }/css/style.css" rel="stylesheet">
+  <link href="${conPath }/css/modify.css" rel="stylesheet">
  <style>
  
  </style>
@@ -18,11 +18,9 @@
  		$('form').submit(function(){
  			var chk = $('#chk').val();
  			if(chk == 'all'){
- 				$('form').attr('action','${conPath }/modifyAllView.do');
- 			} else if(chk == 'id'){
- 				$('form').attr('action','${conPath }/modifyAllView.do');
+ 				$('form').attr('action','${conPath }/modifyAllView.do?modify=${param.modify }');
  			} else if(chk == 'pw'){
- 				$('form').attr('action','${conPath }/modifyAllView.do');
+ 				$('form').attr('action','${conPath }/modifyAllView.do?modify=${param.modify }');
  			}
  		});
  	});
@@ -30,7 +28,7 @@
 </head>
   <body>
 	<jsp:include page="../main/header.jsp" />
-	<div id="form">
+	<div class="form">
 		<jsp:include page="../main/MyPageMenu.jsp"/>	
 		<form action="${conPath }/modifyAllView.do" method="post">
 			<input type="hidden" id="chk" name="chK" value="${param.modify }">

@@ -15,6 +15,11 @@ import com.lec.petshop.service.DogAllService;
 import com.lec.petshop.service.DogBreedService;
 import com.lec.petshop.service.DogContentService;
 import com.lec.petshop.service.DogInsertService;
+import com.lec.petshop.service.FreeBoardContentService;
+import com.lec.petshop.service.FreeBoardListService;
+import com.lec.petshop.service.FreeBoardModifyService;
+import com.lec.petshop.service.FreeBoardModifyViewService;
+import com.lec.petshop.service.FreeBoardWriteService;
 import com.lec.petshop.service.MIdConfirmService;
 import com.lec.petshop.service.MJoinService;
 import com.lec.petshop.service.MLoginService;
@@ -35,6 +40,9 @@ public class PetController extends HttpServlet {
 	private boolean adminJoinForm = false;
 	private boolean dogInsertForm = false;
 	private boolean modifyForm = false;
+	private boolean modifyFreeBoard = false;
+	private boolean writeFreeBoard = false;
+	
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		actionDo(request, response);
@@ -124,22 +132,52 @@ public class PetController extends HttpServlet {
 			}
 			viewPage = "DogAllView.do";
 			dogInsertForm = false;
-		} else if(command.equals("/mypageView.do")) {
+		} else if(command.equals("/mypageView.do")) {   // 마이 페이지
 			viewPage = "member/MyPage.jsp";
-		} else if(command.equals("/modifyView.do")) {
+		} else if(command.equals("/modifyView.do")) {  //  비밀번호 입력받는 페이지
 			viewPage = "member/modify.jsp";
-		} else if(command.equals("/modifyAllView.do")) {
+		} else if(command.equals("/modifyAllView.do")) {  // 수정할 것들 입력받는 페이지 
 			service = new MModifyAllViewService();
 			service.execute(request, response);
 			viewPage = "member/modifyAll.jsp";
 			modifyForm = true;
-		} else if(command.equals("/modify.do")) {
+		} else if(command.equals("/modify.do")) {     // 수정 처리 
 			if(modifyForm) {
 				service = new MModifyAllService();
 				service.execute(request, response);	
 			}
 			viewPage = "member/MyPage.jsp";
 			modifyForm = false;
+		} else if(command.equals("/freeBoardListView.do")) {   // 자유 게시판 리스트(소통)
+			service = new FreeBoardListService();
+			service.execute(request, response);
+			viewPage = "FreeBoard/FreeBoardList.jsp";
+		} else if(command.equals("/freeBoardContentView.do")) {
+			service = new FreeBoardContentService();
+			service.execute(request, response);
+			viewPage = "FreeBoard/FreeBoardContent.jsp";
+		} else if(command.equals("/freeBoardModifyView.do")) {
+			service = new FreeBoardModifyViewService();
+			service.execute(request, response);
+			viewPage = "FreeBoard/FreeBoardModify.jsp";
+			modifyFreeBoard = true;
+		} else if(command.equals("/freeBoardModify.do")) {
+			if(modifyFreeBoard) {
+				service = new FreeBoardModifyService();
+				service.execute(request, response);
+			}
+			viewPage = "freeBoardContentView.do";
+			modifyFreeBoard = false;
+		} else if(command.equals("/freeBoardWriteView.do")) {
+			viewPage = "FreeBoard/FreeBoardWrite.jsp";
+			writeFreeBoard = true;
+		} else if(command.equals("/freeBoardWrite.do")) {
+			if(writeFreeBoard) {
+				service = new FreeBoardWriteService();
+				service.execute(request, response);
+			}
+			viewPage = "freeBoardListView.do";
+			writeFreeBoard = false;
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

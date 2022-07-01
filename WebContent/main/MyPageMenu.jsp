@@ -51,7 +51,6 @@
 				<a href="#">정보수정</a>
 				<ul class="submenu">
 					<li><a href="${conPath }/modifyView.do?modify=all">개인정보 변경</a></li>  
-					<li><a href="${conPath }/modifyView.do?modify=id">ID 변경</a></li>
 					<li><a href="${conPath }/modifyView.do?modify=pw">비밀번호 변경</a></li>
 					<li><a href="#">수신설정</a></li>
 				</ul>

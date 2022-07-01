@@ -454,6 +454,40 @@ public class MemberDao {
 		return result;
 	}
 	
+	// 비밀번호 변경
+	public int updatePwMember(String mid, String oldmpw, String mpw) {
+		int result = FAIL;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE MEMBER SET MPW = ? " + 
+				"                WHERE MID = ? " + 
+				"                    AND MPW = ? ";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mpw);
+			pstmt.setString(2, mid);
+			pstmt.setString(3, oldmpw);
+			result = pstmt.executeUpdate();
+			System.out.println(result == SUCCESS ? "회원 정보 수정 성공" : "회원 정보 수정 실패");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("회원정보수정 실패 : " + mid + mpw + oldmpw);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return result;
+	}
+	
 	
 	
 

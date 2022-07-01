@@ -38,9 +38,9 @@
 	<div id="dogContent_Form">
         <div id="profile"> 프로필</div>
         <div id="profile_eng"> All PET PROFILE </div>
-        <div class="dogimage">  <img src="${conPath }/dogImage/${dogContent.dimage1 }" alt="dimage1" /></div>
-        <div class="dogimage">  <img src="${conPath }/dogImage/${dogContent.dimage2 }" /></div>
-        <div class="dogimage">  <img src="${conPath }/dogImage/${dogContent.dimage3 }" /></div>
+        <div class="dogimage">  <img src="${conPath }/DogImageUpFolder/${dogContent.dimage1 }" alt="dimage1" /></div>
+        <div class="dogimage">  <img src="${conPath }/DogImageUpFolder/${dogContent.dimage2 }" alt="dimage2" /></div>
+        <div class="dogimage">  <img src="${conPath }/DogImageUpFolder/${dogContent.dimage3 }" alt="dimage3" /></div>
         <div id="CuteDog"> Cute Dog </div>
         <table id="mainContent">
             <tr>
@@ -80,7 +80,6 @@
 						${dogYear }년
 					</c:if>
 						${dogAge } 개월 )
-
                 </td>
             </tr>
             <tr>
@@ -97,7 +96,7 @@
 	        	<td colspan="2">
 	        		<button>분양받기</button>
 	        		<button>예약하기</button>
-	        		<button>목록</button>
+	        		<button onclick="location='${conPath }/pet/DogAllView?pageNum=${pageNum }'">목록</button>
 	        	</td>
 	        </tr>
         </table>
@@ -107,6 +106,8 @@
         <div class="dogimage">  <img src="${conPath }/dogImage/${dogContent.dimage4 }" alt="dimage4" /></div>
         <div class="dogimage">  <img src="${conPath }/dogImage/${dogContent.dimage5 }" alt="dimage5" /></div>
     	</div>
+    </div>
+    </div>
     </div>
 	<jsp:include page="../main/footer.jsp" />
   </body>

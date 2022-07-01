@@ -34,6 +34,17 @@
 					history.back();
 				</script>
 			</c:if>
+			<c:if test="${ModifyPwResult eq 1 }">
+				<script>
+					alert('비밀번호 변경 성공 다시 로그인 후 서비스를 이용해주세요.');
+					location.href="${conPath }/loginView.do";
+				</script>
+			</c:if>
+			<c:if test="${ModifyPwResult eq 0  }">
+				<script>
+					alert('현재 비밀번호를 확인해주세요 ');
+				</script>
+			</c:if>
 		</div>
 	</div>
 	<jsp:include page="../main/footer.jsp" />

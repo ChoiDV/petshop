@@ -100,7 +100,7 @@
 						<li class="text">추가로 하나 넣기</li>
 					</ol>
 				</li>
-				<li><a href="#">고객센터</a></li>
+				<li><a href="${conPath }/freeBoardListView.do">Communication</a></li>
 			</ul>
 		</div>
 	</header>
@@ -179,7 +179,7 @@
 						<li class="text">추가로 하나 넣기</li>
 					</ol>
 				</li>
-				<li><a href="#">고객센터</a></li>
+				<li><a href="${conPath }/freeBoardListView.do">Communication</a></li>
 			</ul>
 		</div>
 	</header>
@@ -263,7 +263,7 @@
 						<li class="text">추가로 하나 넣기</li>
 					</ol>
 				</li>
-				<li><a href="#">고객센터</a></li>
+				<li><a href="${conPath }/freeBoardListView.do">Communication</a></li>
 			</ul>
 		</div>
 	</header>	

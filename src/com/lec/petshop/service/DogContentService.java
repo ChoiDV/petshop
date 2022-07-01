@@ -35,6 +35,7 @@ public class DogContentService implements Service {
 		request.setAttribute("dogAge", month);
 		request.setAttribute("dogYear", year);
 		request.setAttribute("aname", aname);
+		request.setAttribute("pageNum", pageNum);
 		
 	}
 

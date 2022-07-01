@@ -84,7 +84,7 @@
 </head>
   <body>
   	<jsp:include page="../main/header.jsp" />
-  		    <div id="join_form">
+  		   <div id="join_form">
         <form action="${conPath }/join.do" method="post">
             <table>
                 <caption>회원가입</caption>

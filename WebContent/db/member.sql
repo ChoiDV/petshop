@@ -74,6 +74,15 @@ UPDATE MEMBER SET MNAME = '홍길동',
                         MBIRTH = '1999-12-03',
                             MADDRESS = '서울시 강남구'
                     WHERE MID='aaa';
+                    
+-- 아이디 변경
+UPDATE MEMBER SET MID = 'Aaa'
+                WHERE MID='aaa';
+                
+-- 비밀번호 변경
+UPDATE MEMBER SET MPW = '111'
+                WHERE MID = 'aaa'
+                    AND MPW ='123';
         
 commit;
 

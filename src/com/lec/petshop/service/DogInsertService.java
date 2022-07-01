@@ -23,7 +23,7 @@ public class DogInsertService implements Service {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		String path = request.getRealPath("dogImage");
+		String path = request.getRealPath("DogImageUpFolder");
 		int maxSize = 1024 * 1024 * 10;
 		String[] dimage = { "", "", "", "", "" };
 		String[] originalDimage = { "", "", "", "", "" };
@@ -75,7 +75,7 @@ public class DogInsertService implements Service {
 					File serverfile = new File(path + "/" + f); // 첨부하지 않으면 filename에는 null이 들어감
 					if (serverfile.exists()) { // 첨부한 파일이 있는지
 						is = new FileInputStream(serverfile); // 원본 파일
-						os = new FileOutputStream( "C:\\choijinyoung\\source\\petshop_project\\petshop\\WebContent\\dogImage/" + f);// 복사될 파일
+						os = new FileOutputStream( "C:\\choijinyoung\\source\\petshop_project\\petshop\\WebContent\\DogImageUpFolder/" + f);// 복사될 파일
 						byte[] bs = new byte[(int) serverfile.length()]; // 서버파일의 크기만큼 바이트로 읽어내겠따는 뜻, 형변환으로도int로 해주기
 						while (true) {
 							int nReadCnt = is.read(bs);
