@@ -21,6 +21,12 @@
 </head>
   <body>
   <jsp:include page="../main/header.jsp"/>
+  	<c:if test="${empty member and empty admin }">
+  		<script>
+  			alert('로그인 후 이용하실수 있습니다.');
+  			location.href="${conPath }/loginView.do";
+  		</script>
+  	</c:if>
   	<c:if test="${modifyResult eq 1 }">
   		<script>
   			alert('수정 성공하였습니다.');

@@ -13,13 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.lec.petshop.dao.FreeBoardDao;
-import com.lec.petshop.dto.AdminDto;
 import com.lec.petshop.dto.FreeBoardDto;
 import com.lec.petshop.dto.MemberDto;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-public class FreeBoardWriteService implements Service {
+public class FreeBoardReplyService implements Service {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
@@ -43,12 +42,14 @@ public class FreeBoardWriteService implements Service {
 			String ftitle = mRequest.getParameter("ftitle");
 			String fcontent = mRequest.getParameter("fcontent");
 			String fip = request.getRemoteAddr();
+			int fnum = Integer.parseInt(mRequest.getParameter("fnum"));
 			FreeBoardDao dao = FreeBoardDao.getInstance();
-			int result = dao.writeFreeBoard(mid, ftitle, fcontent, fip, ffilename[2], ffilename[1], ffilename[0]);
+			FreeBoardDto dto = dao.modifyView_replyView(fnum);
+			int result = dao.reply(mid, ftitle, fcontent, fip, dto.getFgroup(), dto.getFstep(), dto.getFindent(), ffilename[2], ffilename[1], ffilename[0]);
 			if(result == FreeBoardDao.SUCCESS) {
-				request.setAttribute("writeResult", result);  // 성공하면 1
+				request.setAttribute("ReplyResult", result);  // 성공하면 1
 			} else {
-				request.setAttribute("writeResult", result);  // 실패하면 0
+				request.setAttribute("ReplyResult", result);  // 실패하면 0
 			}			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -92,7 +93,6 @@ public class FreeBoardWriteService implements Service {
 
 			}
 		}
-		
 	}
 
 }

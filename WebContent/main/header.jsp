@@ -196,7 +196,7 @@
 			<div id="right_gnb">
 				<ul>
 					<li><a href="${conPath }/logout.do">로그아웃</a></li>
-					<li><a href="#">관리자 마이페이지</a></li>  <!--  관리자 전용 마이페이지  각 관리자가 등록한 동물들 출력해주기  -->
+					<li><a href="${conPath }/adminPageView.do">관리자 마이페이지</a></li>  <!--  관리자 전용 마이페이지  각 관리자가 등록한 동물들 출력해주기  -->
 					<li><b>관리자 ${admin.aname } 님</b></li>
 				</ul>
 			</div>

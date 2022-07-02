@@ -96,7 +96,7 @@
 	        	<td colspan="2">
 	        		<button>분양받기</button>
 	        		<button>예약하기</button>
-	        		<button onclick="location='${conPath }/pet/DogAllView?pageNum=${pageNum }'">목록</button>
+	        		<button onclick="location.href='${conPath }/DogAllView.do?pageNum=${pageNum }'">목록</button>
 	        	</td>
 	        </tr>
         </table>

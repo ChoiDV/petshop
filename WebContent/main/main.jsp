@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
   <title>Insert title here</title>
-  <link href="${conPath }/css/style.css" rel="stylesheet">
+  <link href="${conPath }/css/mainList.css" rel="stylesheet">
  <style>
  
  </style>
@@ -38,36 +38,31 @@
   		</script>
   	</c:if>
   	<jsp:include page="../main/header.jsp"/>
-	<div id="content_form">
-		<table>
-			<tr>
-				<td>
-					main
-				</td>
-			</tr>
-			<tr>
-				<td>
-					main
-				</td>
-			</tr>
-			<tr>
-				<td>
-					main
-				</td>
-			</tr>
-			<tr>
-				<td>
-					main
-				</td>
-			</tr>
-			<tr>
-				<td>
-					main
-				</td>
-			</tr>
-			
+	<table id="dogList">
+			<c:if test="${mainList.size() eq 0 }">
+				<tr>
+					<td id="emptyDog" colspan="4">등록된 Cute Dog가 없습니다.</td>
+				</tr>
+			</c:if>
+			<c:if test="${mainList.size() != 0 }">
+				<tr>
+					<c:set var="i" value="0"/>
+					<c:forEach var="dog" items="${mainList }"> 
+						<td>
+							<a href="${conPath }/DogContentView.do?dnum=${dog.dnum } ">
+								<img src="${conPath }/DogImageUpFolder/${dog.dimage1 }" class="mainimage" alt="대표사진"  >
+								<div class="dogname">${dog.dname }</div>
+								<div class="dogbreed">${dog.dbreedname }</div>
+							</a>
+						</td>
+						<c:if test="${i%3 == 2 and i!=8}">
+							</tr><tr>
+						</c:if>
+						<c:set var="i" value="${i+1 }"/>
+					</c:forEach>
+				</tr>			
+			</c:if>
 		</table>
-	</div>
 	<jsp:include page="../main/footer.jsp"/>
 	
   </body>

@@ -20,18 +20,30 @@
  </script>  
 </head>
   <body>
-  	<c:if test="${DogInsertResult eq 1 }">
+  	<c:if test="${deleteResult eq 1 }">
   		<script>
-  			alert('강아지 등록 성공 ');
+  			alert('강아지 분양글 삭제가 완료되었습니다.');
   		</script>
   	</c:if>
-  	<c:if test="${DogInsertResult eq 0 }">
+  	<c:if test="${deleteResult eq 0 }">
   		<script>
-  			alert('강아지 등록 실패');
+  			alert('강아지 분양글 삭제에 실패하였습니다.');
+  			history.back();
+  		</script>
+  	</c:if>
+  	<c:if test="${DogModifyResult eq 1 }">
+  		<script>
+  			alert('강아지 수정 완료');
+  		</script>
+  	</c:if>
+  	<c:if test="${DogModifyResult eq 0 }" >
+  		<script>
+  			alert('강아지 수정 실패');
   			history.back();
   		</script>
   	</c:if>
 	<jsp:include page="../main/header.jsp" />
+	<jsp:include page="../admin/adminPageMenu.jsp" />
 		<table id="dogList">
 			<c:if test="${dogList.size() eq 0 }">
 				<tr>
@@ -47,7 +59,13 @@
 								<img src="${conPath }/DogImageUpFolder/${dog.dimage1 }" class="mainimage" alt="대표사진"  >
 								<div class="dogname">${dog.dname }</div>
 								<div class="dogbreed">${dog.dbreedname }</div>
-							</a>
+							</a> 
+<%-- 							<c:if test="${ admin.aid eq 'admin' or (admin.aid eq dog.aid ) }  " > --%>
+								<div>
+									<button onclick="location='${conPath }/DogModifyView.do?dnum=${dog.dnum }&pageNum=${pageNum }'">수정</button>
+									<button onclick="location='${conPath }/DogDeleteView.do?dnum=${dog.dnum }'">삭제</button>
+								</div>
+<%-- 							</c:if> --%>
 						</td>
 						<c:if test="${i%4 == 3 and i!=11}">
 							</tr><tr>
@@ -59,8 +77,8 @@
 		</table>
 		<div class="paging">
 		 	<c:if test="${startPage > BLOCKSIZE}">
-		 		 <a href="${conPath }/DogAllView.do?pageNum=1">&lt;&lt;</a> 
-		 		 <a href="${conPath }/DogAllView.do?pageNum=${startPage-1 }">&lt;</a> 
+		 		 <a href="${conPath }/adminPageDogListView.dopageNum=1">&lt;&lt;</a> 
+		 		 <a href="${conPath }/adminPageDogListView.dopageNum=${startPage-1 }">&lt;</a> 
 		 	</c:if>
 		 	<c:forEach var="i" begin="${startPage }" end="${endPage }">
 		 		<c:if test="${i eq pageNum }">
@@ -71,11 +89,10 @@
 		 		</c:if>
 		 	</c:forEach>
 		 	<c:if test="${endPage < pageCnt }">
-		 		[ <a href="${conPath }/DogAllView.do?pageNum=${endPage+1 }">&gt;</a> ]
-		 		[ <a href="${conPath }/DogAllView.do?pageNum=${pageCnt}">&gt;&gt;</a> ]
+		 		[ <a href="${conPath }/adminPageDogListView.do?pageNum=${endPage+1 }">&gt;</a> ]
+		 		[ <a href="${conPath }/adminPageDogListView.do?pageNum=${pageCnt}">&gt;&gt;</a> ]
 		 	</c:if>
 	 	</div> 
 	<jsp:include page="../main/footer.jsp" />
   </body>
 </html>
-

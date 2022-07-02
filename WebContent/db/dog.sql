@@ -44,9 +44,14 @@ INSERT INTO DOG (DNUM, DNAME, DGENDER, DBIRTH, DPRICE, DBREEDNO, AID, DCONTENT, 
 
 -- 2. 강아지 목록 출력 (startRow ~ endRow )  -- 근데 dr_check가 0이면 출력 예약중으로 뜨게하기
 SELECT * FROM(SELECT ROWNUM RN, A.* FROM
-                (SELECT * FROM DOG ORDER BY DRDATE DESC ) A) D, DBREED DB
+                (SELECT D.*, DB.DBREEDNAME FROM DOG D, DBREED DB WHERE D.DBREEDNO = DB.DBREEDNO ORDER BY DRDATE DESC ) A)
+        WHERE RN BETWEEN 1 AND 24
+            ORDER BY RN;
+-- -- hit 수로 메인페이지에 출력할 강아지
+SELECT * FROM(SELECT ROWNUM RN, A.* FROM
+                (SELECT * FROM DOG ORDER BY DHIT DESC ) A) D, DBREED DB
     WHERE D.DBREEDNO = DB.DBREEDNO
-        AND RN BETWEEN 1 AND 24
+        AND RN BETWEEN 1 AND 9
             ORDER BY RN;
 
 -- 3. 글 상세보기 (DNUM 으로 DTO 가져오기 )

@@ -45,9 +45,9 @@ public class FreeBoardDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT FB.*, MNAME FROM "
-				+ "    (SELECT ROWNUM RN, A.* FROM (SELECT * FROM FREEBOARD ORDER BY FGROUP DESC, FSTEP ) A ) FB, MEMBER M"
-				+ "        WHERE FB.MID = M.MID" + "         AND RN BETWEEN ? AND ? ";
+		String sql = "SELECT * FROM" + 
+				"    (SELECT ROWNUM RN, A.* FROM (SELECT F.*, MNAME FROM FREEBOARD F, MEMBER M WHERE F.MID= M.MID ORDER BY FGROUP DESC, FSTEP ) A )" + 
+				"          WHERE RN BETWEEN ? AND ?";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -401,8 +401,8 @@ public class FreeBoardDao {
 		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "DELETE FROM FREEBOARD WHERE FGROUP = ? AND (FSTEP>=0 AND " + 
-				"    FSTEP<(SELECT NVL(MIN(FSTEP),9999) FROM FREEBOARD WHERE FGROUP=? AND FSTEP>0 AND FINDENT<=?))";
+		String sql = "DELETE FROM FREEBOARD WHERE FGROUP = ? AND (FSTEP>=? AND " + 
+				"    FSTEP<(SELECT NVL(MIN(FSTEP),9999) FROM FREEBOARD WHERE FGROUP=? AND FSTEP>? AND FINDENT<=?))";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);

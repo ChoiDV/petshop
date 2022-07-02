@@ -92,9 +92,8 @@ public class DogDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT * FROM(SELECT ROWNUM RN, A.* FROM" + 
-				"                (SELECT * FROM DOG ORDER BY DRDATE DESC ) A) D, DBREED DB" + 
-				"    WHERE D.DBREEDNO = DB.DBREEDNO" + 
-				"        AND RN BETWEEN ? AND ? " + 
+				"                (SELECT D.*, DB.DBREEDNAME FROM DOG D, DBREED DB WHERE D.DBREEDNO = DB.DBREEDNO ORDER BY DRDATE DESC ) A)" + 
+				"        WHERE RN BETWEEN ? AND ? " + 
 				"            ORDER BY RN" ;
 		try {
 			conn = getConnection();
@@ -143,7 +142,116 @@ public class DogDao {
 		return dtos;
 	}
 	
-	// 글 상세보기 ( dnum으로 Dto 가져오기 ) 
+	// hit 높은순으로 강아지 목록 출력
+	public ArrayList<DogDto> hitListDog(){
+		ArrayList<DogDto> dtos = new ArrayList<DogDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM(SELECT ROWNUM RN, A.* FROM" + 
+				"                (SELECT * FROM DOG ORDER BY DHIT DESC ) A) D, DBREED DB" + 
+				"    WHERE D.DBREEDNO = DB.DBREEDNO" + 
+				"        AND RN BETWEEN 1 AND 9 " + 
+				"            ORDER BY RN";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				 int dnum = rs.getInt("dnum");
+				 String dname = rs.getString("dname");
+				 String dgender = rs.getString("dgender");
+				 Date dbirth = rs.getDate("dbirth");
+				 int dprice = rs.getInt("dprice");
+				 int dbreedno = rs.getInt("dbreedno");
+				 String aid = rs.getString("aid");
+				 String dcontent = rs.getString("dcontent");
+				 String dimage1 = rs.getString("dimage1");
+				 String dimage2 = rs.getString("dimage2");
+				 String dimage3 = rs.getString("dimage3");
+				 String dimage4 = rs.getString("dimage4");
+				 String dimage5 = rs.getString("dimage5");
+				 String dip = rs.getString("dip");
+				 int dhit = rs.getInt("dhit");
+				 int dr_check = rs.getInt("dr_check");
+				 Date drdate = rs.getDate("drdate");
+				 String dbreedname = rs.getString("dbreedname");
+				 dtos.add(new DogDto(dnum, dname, dgender, dbirth, dprice, dbreedno, aid, dcontent, dimage1, dimage2, dimage3, dimage4, dimage5, dip, dhit, dr_check, drdate, dbreedname));
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return dtos;
+	}
+	
+	// 글 상세보기 ( dnum으로 Dto 가져오기 ) hitup 없는 
+	public DogDto dogModifyContent(int dnum) {
+		DogDto dto = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM DOG D, DBREED DB " + 
+				"    WHERE D.DBREEDNO = DB.DBREEDNO " + 
+				"        AND DNUM= ? ";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dnum);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {				 
+				 String dname = rs.getString("dname");
+				 String dgender = rs.getString("dgender");
+				 Date dbirth = rs.getDate("dbirth");
+				 int dprice = rs.getInt("dprice");
+				 int dbreedno = rs.getInt("dbreedno");
+				 String aid = rs.getString("aid");
+				 String dcontent = rs.getString("dcontent");
+				 String dimage1 = rs.getString("dimage1");
+				 String dimage2 = rs.getString("dimage2");
+				 String dimage3 = rs.getString("dimage3");
+				 String dimage4 = rs.getString("dimage4");
+				 String dimage5 = rs.getString("dimage5");
+				 String dip = rs.getString("dip");
+				 int dhit = rs.getInt("dhit");
+				 int dr_check = rs.getInt("dr_check");
+				 Date drdate = rs.getDate("drdate");
+				 String dbreedname = rs.getString("dbreedname");
+				 dto = new DogDto(dnum, dname, dgender, dbirth, dprice, dbreedno, aid, dcontent, dimage1, dimage2, dimage3, dimage4, dimage5, dip, dhit, dr_check, drdate, dbreedname);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage() +"상세보기 가져오기 실패"+ dto);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return dto;
+	}
+	// hitup 있는  상세보기
 	public DogDto dogContent(int dnum) {
 		DogDto dto = null;
 		Connection conn = null;

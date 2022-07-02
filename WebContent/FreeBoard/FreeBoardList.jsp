@@ -36,6 +36,16 @@
   		history.back();
   	</script>
   </c:if>
+  <c:if test="${deleteResult >= 1}">
+  	<script>
+  		alert('${deleteResult }개 글 삭제 완료되었습니다.');
+  	</script>
+  </c:if>
+  <c:if test="${deleteResult eq 0 }">
+  	<script>
+  		alert('글 삭제에 실패하였습니다.');
+  	</script>
+  </c:if>
   <jsp:include page="../main/header.jsp"/>
   <div id="allform">
 		<table>

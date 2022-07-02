@@ -19,7 +19,7 @@ import com.lec.petshop.dto.DogDto;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-public class DogInsertService implements Service {
+public class DogModifyService implements Service {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
@@ -38,6 +38,30 @@ public class DogInsertService implements Service {
 				originalDimage[idx] = mRequest.getOriginalFileName(param);// 해당 파라미터 이름으로 첨부된 오리지널 파일 이름 가지고 옴
 				idx++;
 			}
+			DogDao dao = DogDao.getInstance();
+			HttpSession session = request.getSession();
+			int dnum = Integer.parseInt(mRequest.getParameter("dnum"));
+			DogDto oldDog = dao.dogModifyContent(dnum);
+			if(dimage[0] == null ) {
+				dimage[0] = oldDog.getDimage1();
+			}
+			if(dimage[1] == null) {
+				dimage[1] = oldDog.getDimage2();
+			}
+			if(dimage[2] == null) {
+				dimage[2] = oldDog.getDimage3();
+			} 
+			if(dimage[3] == null) {
+				dimage[3] = oldDog.getDimage4();
+			} 
+			if(dimage[4] == null) {
+				dimage[4] = oldDog.getDimage5();
+			}
+//			for(int i = 0; i < dimage.length; i++) {
+//				if(dimage[i] == null) {
+//					dimage[i] = oldDog.getDimage+(i+1)();
+//				}
+//			}		
 			String dname = mRequest.getParameter("dname");
 			String dgender = mRequest.getParameter("dgender");
 			String dbirthStr = mRequest.getParameter("dbirth");
@@ -48,21 +72,19 @@ public class DogInsertService implements Service {
 			int dbreedno = Integer.parseInt(mRequest.getParameter("dbreedno"));
 			int dprice = Integer.parseInt(mRequest.getParameter("dprice"));
 			String dcontent = mRequest.getParameter("dcontent");
-			DogDao dao = DogDao.getInstance();
-			HttpSession session = request.getSession();
+			
 			String aid =  ((AdminDto) session.getAttribute("admin")).getAid();
 			String dip = request.getRemoteAddr();
-			DogDto dog = new DogDto(0, dname, dgender, dbirth, dprice, dbreedno, aid, dcontent, dimage[4],  dimage[3],  dimage[2],  dimage[1],  dimage[0], dip, 0, 1, null, null);
-			int result = dao.insertDog(dog);
+			DogDto dog = new DogDto(dnum, dname, dgender, dbirth, dprice, dbreedno, aid, dcontent, dimage[4],  dimage[3],  dimage[2],  dimage[1],  dimage[0], dip, 0, 1, null, null);
+			int result = dao.updateDog(dog);
 			if(result == DogDao.SUCCESS) {
-				System.out.println(aid+" 관리자가 강아지 등록 성공");
-				request.setAttribute("DogInsertResult", result);
+				System.out.println(aid+" 관리자가 강아지 수정 성공");
+				request.setAttribute("DogModifyResult", result);
 			} else {
 				System.out.println("등록 실패"+dog);
-				request.setAttribute("DogInsertResult", result);
+				request.setAttribute("DogModifyResult", result );
 			}
 		} catch (Exception e) {
-
 			System.out.println(e.getMessage());
 		}
 
@@ -105,7 +127,6 @@ public class DogInsertService implements Service {
 
 			}
 		}
-
 
 	}
 

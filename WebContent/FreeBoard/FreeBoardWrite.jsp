@@ -33,6 +33,7 @@
   	</script>
   </c:if>
   <jsp:include page="../main/header.jsp"/>
+  	<c:if test="${empty reply }">
 	<div class="form">
 		<form action="${conPath }/freeBoardWrite.do" method="post" enctype="multipart/form-data">
 			<table>
@@ -63,6 +64,40 @@
 			</table>
 		</form>
 	</div>
+	</c:if>
+	<c:if test="${not empty reply }">
+		<div class="form">
+		<form action="${conPath }/freeBoardReply.do" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="fnum" value="${reply.fnum }">
+			<table>
+				<caption>${reply.ftitle } 의 Express</caption>
+				<tr>
+					<td>
+						<input type="text" name="ftitle" placeholder="제목을 입력해 주세요.">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<textarea rows="10" cols="10" name="fcontent" placeholder="내용을 입력하세요"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="file" name="ffilename1">
+						<input type="file" name="ffilename2">
+						<input type="file" name="ffilename3">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="submit" value="답변글 등록">
+						<input type="button" value="뒤로가기" onclick='history.back();'>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	</c:if>
 	<jsp:include page="../main/footer.jsp"/>
   </body>
 </html>

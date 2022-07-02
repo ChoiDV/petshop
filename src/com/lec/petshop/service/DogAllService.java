@@ -10,7 +10,7 @@ public class DogAllService implements Service {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		String pageNum = request.getParameter("pageNum");
-		if(pageNum == null) {
+		if(pageNum == null || pageNum.equals("")) {
 			pageNum="1";
 		}
 		int currentPage = Integer.parseInt(pageNum);
@@ -33,6 +33,7 @@ public class DogAllService implements Service {
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("currentPage", currentPage);
 		request.setAttribute("pageCnt", pageCnt);
+		request.setAttribute("pageNum", pageNum);
 
 	}
 

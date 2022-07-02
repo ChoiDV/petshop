@@ -6,21 +6,21 @@ import javax.servlet.http.HttpServletResponse;
 import com.lec.petshop.dao.FreeBoardDao;
 import com.lec.petshop.dto.FreeBoardDto;
 
-public class FreeBoardContentService implements Service {
+public class FreeBoardDeleteService implements Service {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		String pageNum = request.getParameter("pageNum");
-		String fnumStr = request.getParameter("fnum");
-		if(fnumStr == null ) {
-			fnumStr = String.valueOf(request.getAttribute("fnum"));
-		}
-		int fnum = Integer.parseInt(fnumStr);
+		int fnum = Integer.parseInt(request.getParameter("fnum"));
 		FreeBoardDao dao = FreeBoardDao.getInstance();
-		request.setAttribute("freeContent", dao.contentView(fnum));
+		FreeBoardDto dto = dao.modifyView_replyView(fnum);
+		int result = dao.delete(dto.getFgroup(), dto.getFstep(), dto.getFindent());
+		if(result >= FreeBoardDao.SUCCESS) {
+			request.setAttribute("deleteResult", result);
+		} else {
+			request.setAttribute("deleteResult", result);
+		}
 		request.setAttribute("pageNum", pageNum);
-		request.setAttribute("fnum", fnum);
-
 	}
 
 }

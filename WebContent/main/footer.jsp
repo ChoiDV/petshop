@@ -37,17 +37,9 @@
 						<c:if test="${empty member and empty admin}"> 
 							<b><a href="${conPath }/adminLoginView.do" style="background-color: #ffd1dc;">관리자 모드</a></b>
 						</c:if>
-						<c:if test="${not empty admin and (admin.aid eq 'admin' )}">
-							<b><a href="${conPath }/adminJoinView.do" style="background-color: #ffd1dc;">관리자 등록</a></b>
-						</c:if>
-			</p>
+				</p>
 			<p style="background-color: #ffd1dc;">Copyright© 2022 tj . All rights reserved.</p>
 		</div>
-		<c:if test="${not empty admin }">
-	 	<div id="insertDog">
-	 		<a href="${conPath }/DogInsertView.do"><b>강아지 등록</b></a>
-		</div>
-	 </c:if>
 	</footer>
 </body>
 </html>
