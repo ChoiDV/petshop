@@ -20,19 +20,20 @@ SELECT * FROM DOG_REPLY;
 -- 강아지 분양글 댓글쓰기
 INSERT INTO DOG_REPLY (RNO, DNUM, MID, REPLY_CONTENT, RIP )
     VALUES (DREPLY_SEQ.NEXTVAL, 1, 'aaa', '이 강아지 너무 귀엽네요', '192.168.10.30');
-INSERT INTO DOG_REPLY (RNO, DNUM, MID, REPLY_CONTENT, RIP)
-    VALUES (DREPLY_SEQ.NEXTVAL, 3, 'aaa', '이 강아지 너무 사랑스럽네요', '192.168.10.30');
+INSERT INTO DOG_REPLY (RNO, DNUM, MID, REPLY_CONTENT, RIP , RDATE)
+    VALUES (DREPLY_SEQ.NEXTVAL, 3, 'aaa', '이 강아지 너무 사랑스럽네요', '192.168.10.30', TO_DATE(SYSDATE,'YYYY/MM/DDHH:HI'));
 
 -- 강아지 분양글의 댓글 출력
 SELECT D.* FROM(SELECT ROWNUM RN, A.* FROM
-                (SELECT * FROM DOG_REPLY WHERE DNUM = 1 ORDER BY RDATE) A) D
-    WHERE RN BETWEEN 1 AND 10 ;
+                (SELECT * FROM DOG_REPLY WHERE DNUM = 3 ORDER BY RDATE DESC) A) D
+    WHERE RN BETWEEN 1 AND 50 ;
 
 -- 댓글 수정
 UPDATE DOG_REPLY SET REPLY_CONTENT='이 강아지 제가 사랑스럽네요',
                         RIP ='192.147.12.30'
                             WHERE RNO=1;
-                            
+-- 댓글 개수 가져오기
+SELECT COUNT(*) FROM DOG_REPLY WHERE DNUM=1;
 -- 댓글 삭제
 DELETE DOG_REPLY WHERE RNO=3;
 

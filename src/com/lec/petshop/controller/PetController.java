@@ -19,6 +19,7 @@ import com.lec.petshop.service.DogDeleteViewService;
 import com.lec.petshop.service.DogInsertService;
 import com.lec.petshop.service.DogModifyContentService;
 import com.lec.petshop.service.DogModifyService;
+import com.lec.petshop.service.DogReplyService;
 import com.lec.petshop.service.FreeBoardContentService;
 import com.lec.petshop.service.FreeBoardDeleteService;
 import com.lec.petshop.service.FreeBoardDeleteViewService;
@@ -134,7 +135,7 @@ public class PetController extends HttpServlet {
 		} else if(command.equals("/DogInsertView.do")) {  // 관리자가 강아지 등록 
 			service = new DogBreedService();
 			service.execute(request, response);
-			viewPage = "pet/DogInsert.jsp";
+			viewPage = "admin/adminDogInsert.jsp";
 			dogInsertForm = true;
 		} else if(command.equals("/DogInsert.do")) {  // 강아지 등록 처리
 			if(dogInsertForm) {
@@ -209,36 +210,40 @@ public class PetController extends HttpServlet {
 			}
 			viewPage = "freeBoardListView.do";
 			replyFreeBoard = false;
-		} else if(command.equals("/adminPageView.do")) {
+		} else if(command.equals("/adminPageView.do")) {    // 관리자 마이페이지 이동
 			viewPage = "admin/adminPage.jsp";
-		} else if(command.equals("/adminPageDogListView.do")) {
+		} else if(command.equals("/adminPageDogListView.do")) {  // 관리자 마이페이지  강아지 리스트 출력
 			service = new DogAllService();
 			service.execute(request, response);
 			viewPage = "admin/adminDogListView.jsp";
-		} else if(command.equals("/DogModifyView.do")) {
+		} else if(command.equals("/DogModifyView.do")) {  //  강아지 수정 View단
 			service = new DogModifyContentService();
 			service.execute(request, response);
 			viewPage = "admin/adminDogModifyView.jsp";
 			dogModifyForm = true;
-		} else if(command.equals("/DogModify.do")) {
+		} else if(command.equals("/DogModify.do")) {  // 강아지 수정 처리 단
 			if(dogModifyForm) {
 				service = new DogModifyService();
 				service.execute(request, response);
 			}
 			viewPage = "adminPageDogListView.do";
 			dogModifyForm = false;
-		} else if(command.equals("/DogDeleteView.do")) {
+		} else if(command.equals("/DogDeleteView.do")) {   // 강아지 분양글 삭제 View단
 			service = new DogDeleteViewService();
 			service.execute(request, response);
 			viewPage = "admin/adminDogDeleteView.jsp";
 			dogDeleteForm = true;
-		} else if(command.equals("/DogDelete.do")) {
+		} else if(command.equals("/DogDelete.do")) {  // 강아지 삭제 처리 단
 			if(dogDeleteForm) {
 				service = new DogDeleteService();
 				service.execute(request, response);
 			}
 			viewPage = "adminPageDogListView.do";
 			dogDeleteForm = false;
+		} else if(command.equals("/dogReplyInsert.do")) {   // 강아지 댓글 처리 단
+			service = new DogReplyService();
+			service.execute(request, response);
+			viewPage = "DogContentView.do";
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

@@ -79,7 +79,7 @@ public class Dog_ReplyDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "SELECT D.* FROM(SELECT ROWNUM RN, A.* FROM" + 
-				"                (SELECT * FROM DOG_REPLY WHERE DNUM = ? ORDER BY RDATE) A) D" + 
+				"                (SELECT * FROM DOG_REPLY WHERE DNUM = ? ORDER BY RDATE DESC) A) D" + 
 				"    WHERE RN BETWEEN ? AND ? ";
 		try {
 			conn = getConnection();
@@ -179,6 +179,39 @@ public class Dog_ReplyDao {
 		return result;
 	}
 	
+	// 댓글 개수 가져오기
+	public int totalRCnt(int dnum) {
+		int totalRCnt = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT COUNT(*) FROM DOG_REPLY WHERE DNUM= ?";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dnum);
+			rs = pstmt.executeQuery();
+			rs.next();
+			totalRCnt = rs.getInt(1);
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return totalRCnt;
+	}
 	
 	
 }

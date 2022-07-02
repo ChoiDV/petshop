@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.lec.petshop.dao.AdminDao;
 import com.lec.petshop.dao.DogDao;
+import com.lec.petshop.dao.Dog_ReplyDao;
+import com.lec.petshop.dao.FreeBoardDao;
 import com.lec.petshop.dto.AdminDto;
 import com.lec.petshop.dto.DogDto;
 
@@ -36,6 +38,36 @@ public class DogContentService implements Service {
 		request.setAttribute("dogYear", year);
 		request.setAttribute("aname", aname);
 		request.setAttribute("pageNum", pageNum);
+		
+		// 댓글
+		String replyPageNum = request.getParameter("replyPageNum");
+		if(replyPageNum == null || replyPageNum.equals("")) {
+			if(request.getAttribute("replyPageNum")==null) {
+				replyPageNum = "1";
+			}else {
+				replyPageNum = String.valueOf(request.getAttribute("replyPageNum"));
+			}
+		}
+		int currentReplyPage = Integer.parseInt(replyPageNum);
+		final int PAGESIZE = 10; 
+		final int BLOCKSIZE = 5;
+		int startRow = (currentReplyPage -1 ) * PAGESIZE + 1;
+		int endRow = startRow + PAGESIZE -1;
+		Dog_ReplyDao rdao = Dog_ReplyDao.getInstance();
+		request.setAttribute("replyList", rdao.listDReply(dnum, startRow, endRow));
+		int totalCnt = rdao.totalRCnt(dnum);
+		int pageCnt = (int)Math.ceil((double)totalCnt/PAGESIZE); 
+		int startPage = ((currentReplyPage -1 )/BLOCKSIZE) * BLOCKSIZE +1;
+		int endPage = startPage + BLOCKSIZE - 1;
+		if(endPage > pageCnt) {
+			endPage = pageCnt;
+		}
+		request.setAttribute("BLOCKSIZE", BLOCKSIZE);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("replyPageNum", currentReplyPage);
+		request.setAttribute("pageCnt", pageCnt);
+		
 		
 	}
 

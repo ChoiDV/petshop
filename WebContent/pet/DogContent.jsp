@@ -20,6 +20,22 @@
  </script>  
 </head>
   <body>
+  <c:if test="${empty member and empty admin}">
+  	<script>
+  		alert('로그인 후 이용가능합니다.');
+  		location.href="${conPath }/loginView.do";
+  	</script>
+  </c:if>
+  <c:if test="${replyResult eq 1 }">
+  	<script>
+		alert('댓글 작성 성공');
+  	</script>
+  </c:if>
+  <c:if test="${replyResult eq 0 }">
+  	<script>
+  		alert('댓글 작성 실패');
+  	</script>
+  </c:if>
   <jsp:include page="../main/header.jsp" />
   <div id="AllForm">
 	<table id="bar">
@@ -102,12 +118,41 @@
         </table>
         <div id="precontent">
         	<pre>${dogContent.dcontent }</pre>
-        <div>
+        
         <div class="dogimage">  <img src="${conPath }/dogImage/${dogContent.dimage4 }" alt="dimage4" /></div>
         <div class="dogimage">  <img src="${conPath }/dogImage/${dogContent.dimage5 }" alt="dimage5" /></div>
     	</div>
-    </div>
-    </div>
+    </div>  <!--  id=dogContent_Form -->
+    </div>  <!--  all form -->
+    <div id="reply">
+    	<form action="${conPath }/dogReplyInsert.do" method="post" >
+    		<input type="hidden" name="dnum" value="${dogContent.dnum }">
+    		<input type="hidden" name="pageNum" value="${pageNum }">
+    	<table>
+    		<caption>${dogContent.dname } 에게 한마디</caption>
+    		<tr>
+    			<td>
+    				<input type="text" name="reply_content">
+    				<input type="submit" value="등록">
+    			</td>
+    		</tr>
+    	</table>
+    	</form>
+    	<table>
+			<c:if test="${replyList.size() eq 0 }">
+				<tr><td>등록된 댓글이 없습니다.</td></tr>
+			</c:if>
+			<c:if test="${replyList.size() != 0 }">
+				<c:forEach var="reply" items="${replyList }"> 
+					<tr>
+						<td>${reply.rn } : </td>
+						<td>작성자 id : ${reply.mid } </td>
+						<td>${reply.reply_content }</td>
+						<td><fmt:formatDate value="${reply.rdate }" type="date" pattern="YY.MM.dd HH:mm"/></td>
+					</tr>
+				</c:forEach>
+			</c:if>
+    	</table>
     </div>
 	<jsp:include page="../main/footer.jsp" />
   </body>
