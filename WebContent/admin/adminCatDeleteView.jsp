@@ -14,9 +14,13 @@
  </style>
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <script>
- 	$(document).ready(function(){
- 		
- 	});
+ 	answer = confirm('정말 삭제하시겠습니까?');
+	if(answer == true){
+		location.href="${conPath }/CatDelete.do?cnum=${cnum }&pageNum=${pageNum }";
+	} else {
+		alert('삭제 취소되었습니다.');
+		history.back();
+	}
  </script>  
 </head>
   <body>

@@ -77,7 +77,7 @@
 				</li>
 				<li>Pretty Cat
 					<ol class="subMenu">
-						<li><a href="#"><img src="${conPath }/img/고양이전체보기.jpg" /></a></li>
+						<li><a href="${conPath }/CatAllView.do"><img src="${conPath }/img/고양이전체보기.jpg" /></a></li>
 						<li><a href="#"><img src="${conPath }/img/고양이프리미엄.jpg" /></a></li>
 						<li><a href="#"><img src="${conPath }/img/묘종별모아보기.jpg" /></a></li>
 						<li><a href="#"><img src="${conPath }/img/지점별 모아보기.jpg" /></a></li>
@@ -156,7 +156,7 @@
 				</li>
 				<li>Pretty Cat
 					<ol class="subMenu">
-						<li><a href="#"><img src="${conPath }/img/고양이전체보기.jpg" /></a></li>
+						<li><a href="${conPath }/CatAllView.do"><img src="${conPath }/img/고양이전체보기.jpg" /></a></li>
 						<li><a href="#"><img src="${conPath }/img/고양이프리미엄.jpg" /></a></li>
 						<li><a href="#"><img src="${conPath }/img/묘종별모아보기.jpg" /></a></li>
 						<li><a href="#"><img src="${conPath }/img/지점별 모아보기.jpg" /></a></li>
@@ -240,7 +240,7 @@
 				</li>
 				<li>Pretty Cat
 					<ol class="subMenu">
-						<li><a href="#"><img src="${conPath }/img/고양이전체보기.jpg" /></a></li>
+						<li><a href="${conPath }/CatAllView.do"><img src="${conPath }/img/고양이전체보기.jpg" /></a></li>
 						<li><a href="#"><img src="${conPath }/img/고양이프리미엄.jpg" /></a></li>
 						<li><a href="#"><img src="${conPath }/img/묘종별모아보기.jpg" /></a></li>
 						<li><a href="#"><img src="${conPath }/img/지점별 모아보기.jpg" /></a></li>

@@ -13,82 +13,82 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.lec.petshop.dao.DogDao;
+import com.lec.petshop.dao.CatDao;
 import com.lec.petshop.dto.AdminDto;
-import com.lec.petshop.dto.DogDto;
+import com.lec.petshop.dto.CatDto;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-public class DogModifyService implements Service {
+public class CatModifyService implements Service {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		String path = request.getRealPath("DogImageUpFolder");
 		int maxSize = 1024 * 1024 * 10;
-		String[] dimage = { "", "", "", "", "" };
-		String[] originalDimage = { "", "", "", "", "" };
+		String[] cimage = { "", "", "", "", "" };
+		String[] originalCimage = { "", "", "", "", "" };
 		try {
 			MultipartRequest mRequest = new MultipartRequest(request, path, maxSize, "utf-8",
-					new DefaultFileRenamePolicy());
+															new DefaultFileRenamePolicy());
 			Enumeration<String> paramNames = mRequest.getFileNames();
 			int idx = 0;
 			while (paramNames.hasMoreElements()) {
 				String param = paramNames.nextElement(); // 파라미터 이름 받아오기
-				dimage[idx] = mRequest.getFilesystemName(param); // 그 파라미터 이름으로 저장된 파일을 가지고 옴
-				originalDimage[idx] = mRequest.getOriginalFileName(param);// 해당 파라미터 이름으로 첨부된 오리지널 파일 이름 가지고 옴
+				cimage[idx] = mRequest.getFilesystemName(param); // 그 파라미터 이름으로 저장된 파일을 가지고 옴
+				originalCimage[idx] = mRequest.getOriginalFileName(param);// 해당 파라미터 이름으로 첨부된 오리지널 파일 이름 가지고 옴
 				idx++;
 			}
-			DogDao dao = DogDao.getInstance();
+			CatDao dao = CatDao.getInstance();
 			HttpSession session = request.getSession();
-			int dnum = Integer.parseInt(mRequest.getParameter("dnum"));
-			DogDto oldDog = dao.dogModifyContent(dnum);
-			if(dimage[0] == null ) {
-				dimage[0] = oldDog.getDimage5();
+			int cnum = Integer.parseInt(mRequest.getParameter("cnum"));
+			CatDto oldCat = dao.catModifyContent(cnum);
+			if(cimage[0] == null ) {
+				cimage[0] = oldCat.getCimage5();
 			}
-			if(dimage[1] == null) {
-				dimage[1] = oldDog.getDimage4();
+			if(cimage[1] == null) {
+				cimage[1] = oldCat.getCimage4();
 			}
-			if(dimage[2] == null) {
-				dimage[2] = oldDog.getDimage3();
+			if(cimage[2] == null) {
+				cimage[2] = oldCat.getCimage3();
 			} 
-			if(dimage[3] == null) {
-				dimage[3] = oldDog.getDimage2();
+			if(cimage[3] == null) {
+				cimage[3] = oldCat.getCimage2();
 			} 
-			if(dimage[4] == null) {
-				dimage[4] = oldDog.getDimage1();
+			if(cimage[4] == null) {
+				cimage[4] = oldCat.getCimage1();
 			}
 //			for(int i = 0; i < dimage.length; i++) {
 //				if(dimage[i] == null) {
 //					dimage[i] = oldDog.getDimage+(i+1)();
 //				}
 //			}		
-			String dname = mRequest.getParameter("dname");
-			String dgender = mRequest.getParameter("dgender");
-			String dbirthStr = mRequest.getParameter("dbirth");
-			Date dbirth = null;
-			if (!dbirthStr.equals("")) {
-				dbirth = Date.valueOf(dbirthStr);
+			String cname = mRequest.getParameter("cname");
+			String cgender = mRequest.getParameter("cgender");
+			String cbirthStr = mRequest.getParameter("cbirth");
+			Date cbirth = null;
+			if (!cbirthStr.equals("")) {
+				cbirth = Date.valueOf(cbirthStr);
 			}
-			int dbreedno = Integer.parseInt(mRequest.getParameter("dbreedno"));
-			int dprice = Integer.parseInt(mRequest.getParameter("dprice"));
-			String dcontent = mRequest.getParameter("dcontent");
+			int cbreedno = Integer.parseInt(mRequest.getParameter("cbreedno"));
+			int cprice = Integer.parseInt(mRequest.getParameter("cprice"));
+			String ccontent = mRequest.getParameter("ccontent");
 			
 			String aid =  ((AdminDto) session.getAttribute("admin")).getAid();
-			String dip = request.getRemoteAddr();
-			DogDto dog = new DogDto(dnum, dname, dgender, dbirth, dprice, dbreedno, aid, dcontent, dimage[4],  dimage[3],  dimage[2],  dimage[1],  dimage[0], dip, 0, 1, null, null);
-			int result = dao.updateDog(dog);
-			if(result == DogDao.SUCCESS) {
-				System.out.println(aid+" 관리자가 강아지 수정 성공");
-				request.setAttribute("DogModifyResult", result);
+			String cip = request.getRemoteAddr();
+			CatDto cat = new CatDto(cnum, cname, cgender, cbirth, cprice, cbreedno, aid, ccontent, cimage[4], cimage[3], cimage[2], cimage[1], cimage[0], cip, 0, 1, null, null );
+			int result = dao.updateCat(cat);
+			if(result == CatDao.SUCCESS) {
+				System.out.println(aid+" 관리자가 고양이 수정 성공");
+				request.setAttribute("CatModifyResult", result);
 			} else {
-				System.out.println("등록 실패"+dog);
-				request.setAttribute("DogModifyResult", result );
+				System.out.println("수정 실패"+cat);
+				request.setAttribute("CatModifyResult", result );
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 
-		for (String f : dimage) {
+		for (String f : cimage) {
 			if (f != null) { // f가 null이 아닐때만 카피할 것
 				// 파일복사
 				InputStream is = null;

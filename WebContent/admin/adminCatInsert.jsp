@@ -10,58 +10,51 @@
   <title>Insert title here</title>
   <link href="${conPath }/css/doginsert.css" rel="stylesheet">
  <style>
- 
+	caption {
+		font-weight: bold;
+		font-size: 3em;
+		color: white;
+		margin-bottom: 30px;
+   		text-shadow:-1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+	}
  </style>
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
- <script>
- 	$(document).ready(function(){
- 		
- 	});
- </script>  
  <link rel="stylesheet"
 				href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 </head>
   <body>
-	<jsp:include page="../main/header.jsp"/>
+  	<jsp:include page="../main/header.jsp"/>
   	<jsp:include page="../admin/adminPageMenu.jsp"/>
 	<div id="form">
-        <form action="${conPath }/DogModify.do" method="post" enctype="multipart/form-data">
-        	<input type="hidden" name="dnum" value="${dogModifyContent.dnum }">
+        <form action="${conPath }/CatInsert.do" method="post" enctype="multipart/form-data">
             <table id="input_form">
-            	<caption>Dog Modify</caption>
+            	<caption>Cat Register</caption>
                 <tr>
-                    <th>강아지 이름</th>
+                    <th>고양이 이름</th>
                     <td>
-                        <input type="text" name="dname" required="required" value="${dogModifyContent.dname }">
+                        <input type="text" name="cname" required="required">
                     </td>
                 </tr>
                 <tr>
-                    <th>강아지 성별</th>
+                    <th>고양이 성별</th>
                     <td>
-                    	<c:if test="${dogModifyContent.dgender eq 'F' }">
-	                    	 <input type="radio" name="dgender" value="M">수컷
-		                     <input type="radio" name="dgender" value="F" checked="checked">암컷
-                    	</c:if>
-                    	<c:if test="${dogModifyContent.dgender eq 'M' }">
-	                        <input type="radio" name="dgender" value="M" checked="checked">수컷
-	                        <input type="radio" name="dgender" value="F">암컷
-                        </c:if>
+                        <input type="radio" name="cgender" value="M">수컷
+                        <input type="radio" name="cgender" value="F">암컷
                     </td>
                 </tr>
                 <tr>
-                    <th>강아지 생년월일</th>
+                    <th>고양이 생년월일</th>
                     <td>
-                        <input type="text" name="dbirth" id="datepicker" required="required" value="${dogModifyContent.dbirth }">
+                        <input type="text" name="cbirth" id="datepicker" required="required">
                     </td>
                 </tr>
                 <tr>
-                    <th>견종</th>
+                    <th>묘종</th>
                     <td>
-                        <input type="text" name="dbreedno" list="dbreedname" required="required">
-                        <datalist id="dbreedname" >
-                        	<option value="${dogModifyContent.dbreedno }">${dogModifyContent.dbreedname }</option>
+                        <input type="text" name="cbreedno" list="cbreedname" required="required">
+                        <datalist id="cbreedname">
                             <c:forEach var="list" items="${breedlist }">
-                                <option value="${list.dbreedno }">${list.dbreedname }</option>
+                                <option value="${list.cbreedno }">${list.cbreedname }</option>
                             </c:forEach>
                         </datalist>
                     </td>
@@ -69,34 +62,34 @@
                 <tr>
                     <th>분양가</th>
                     <td>
-                        <input type="number" name="dprice" required="required" value="${dogModifyContent.dprice }">
+                        <input type="number" name="cprice" required="required">
                     </td>
                 </tr>
                 <tr>
                     <th>본문</th>
                     <td>
-                        <textarea rows="13" cols="100" name="dcontent">${dogModifyContent.dcontent }</textarea>
+                        <textarea rows="13" cols="100" name="ccontent"></textarea>
                     </td>
                 </tr>
                 <tr>
                     <th>대표사진</th>
                     <td>
-                        <input type="file" name="dimage1" >
+                        <input type="file" name="cimage1" required="required">
                     </td>
                 </tr>
                 <tr>
                     <th>추가사진</th>
                     <td>
-                        <input type="file" name="dimage2">
-                        <input type="file" name="dimage3">
-                        <input type="file" name="dimage4">
-                        <input type="file" name="dimage5">
+                        <input type="file" name="cimage2">
+                        <input type="file" name="cimage3">
+                        <input type="file" name="cimage4">
+                        <input type="file" name="cimage5">
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2" id="submit">
                         <input type="submit" value="등록" class="btn">
-                        <input type="button" value="뒤로가기" class="btn" onclick="location='${conPath}/adminPageDogListView.do?pageNum=${pageNum }'">
+                        <input type="button" value="뒤로가기" class="btn" onclick="location='history.back()'">
                     </td>
                 </tr>
             </table>

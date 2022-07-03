@@ -11,6 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.lec.petshop.service.AdminJoinService;
 import com.lec.petshop.service.AdminLoginService;
+import com.lec.petshop.service.CatAllService;
+import com.lec.petshop.service.CatBreedService;
+import com.lec.petshop.service.CatContentService;
+import com.lec.petshop.service.CatDeleteService;
+import com.lec.petshop.service.CatDeleteViewService;
+import com.lec.petshop.service.CatInsertService;
+import com.lec.petshop.service.CatModifyContentSerivce;
+import com.lec.petshop.service.CatModifyService;
+import com.lec.petshop.service.CatReplyService;
 import com.lec.petshop.service.DogAllService;
 import com.lec.petshop.service.DogBreedService;
 import com.lec.petshop.service.DogContentService;
@@ -55,6 +64,9 @@ public class PetController extends HttpServlet {
 	private boolean replyFreeBoard = false;
 	private boolean dogModifyForm = false;
 	private boolean dogDeleteForm = false;
+	private boolean catInsertForm = false;
+	private boolean catModifyForm = false;
+	private boolean catDeleteForm = false;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		actionDo(request, response);
@@ -142,7 +154,7 @@ public class PetController extends HttpServlet {
 				service = new DogInsertService();
 				service.execute(request, response);
 			}
-			viewPage = "DogAllView.do";
+			viewPage = "admin/adminDogListView.jsp";
 			dogInsertForm = false;
 		} else if(command.equals("/mypageView.do")) {   // 마이 페이지
 			viewPage = "member/MyPage.jsp";
@@ -242,8 +254,60 @@ public class PetController extends HttpServlet {
 			dogDeleteForm = false;
 		} else if(command.equals("/dogReplyInsert.do")) {   // 강아지 댓글 처리 단
 			service = new DogReplyService();
-			service.execute(request, response);
+			service.execute(request, response);			
 			viewPage = "DogContentView.do";
+		} else if(command.equals("/CatAllView.do")) {   // 고양이 전체출력 
+			service = new CatAllService();
+			service.execute(request, response);
+			viewPage = "pet/CatAllView.jsp";
+		} else if(command.equals("/CatContentView.do")) {  // 고양이 상세보기 
+			service = new CatContentService();
+			service.execute(request, response);
+			viewPage = "pet/CatContent.jsp";
+		} else if(command.equals("/CatInsertView.do")) {  // 관리자 고양이 등록 
+			service = new CatBreedService();
+			service.execute(request, response);
+			viewPage = "admin/adminCatInsert.jsp";
+			catInsertForm = true;
+		} else if(command.equals("/CatInsert.do")) {  // 고양이 등록 처리 
+			if(catInsertForm) {
+				service = new CatInsertService();
+				service.execute(request, response);
+			}
+			viewPage = "admin/adminCatListView.jsp";
+			catInsertForm = false;
+		} else if(command.equals("/adminPageCatListView.do")) { // 관리자 고양이 출력 View단
+			service = new CatAllService();
+			service.execute(request, response);
+			viewPage = "admin/adminCatListView.jsp";
+		} else if(command.equals("/CatModifyView.do")) {  // 고양이 수정 View단 
+			service = new CatModifyContentSerivce();
+			service.execute(request, response);
+			viewPage = "admin/adminCatModifyView.jsp";
+			catModifyForm = true;
+		} else if(command.equals("/CatModify.do")) {  // 고양이 수정 처리 단
+			if(catModifyForm) {
+				service = new CatModifyService();
+				service.execute(request, response);
+			}
+			viewPage = "adminPageCatListView.do";
+			catModifyForm = false;
+		} else if(command.equals("/CatDeleteView.do")) {  // 고양이 삭제  View 단
+			service = new CatDeleteViewService();
+			service.execute(request, response);
+			viewPage = "admin/adminCatDeleteView.jsp";
+			catDeleteForm = true;
+		} else if(command.equals("/CatDelete.do")) {  // 고양이 삭제 처리 단 
+			if(catDeleteForm) {
+				service = new CatDeleteService();
+				service.execute(request, response);
+			}
+			viewPage = "adminPageCatListView.do";
+			catDeleteForm = false;
+		} else if(command.equals("/catReplyInsert.do")) {  // 고양이 댓글 작성  처리
+			service = new CatReplyService();
+			service.execute(request, response);
+			viewPage = "CatContentView.do";
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

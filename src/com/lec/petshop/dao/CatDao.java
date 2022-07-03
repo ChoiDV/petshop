@@ -13,6 +13,8 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import com.lec.petshop.dto.CatDto;
+import com.lec.petshop.dto.CbreedDto;
+import com.lec.petshop.dto.DbreedDto;
 
 public class CatDao {
 	public static final int SUCCESS = 1;
@@ -142,7 +144,7 @@ public class CatDao {
 		return dtos;
 	}
 
-	// 글상세보기
+	// 글상세보기  hitup
 	public CatDto catContent(int cnum) {
 		CatDto dto = null;
 		Connection conn = null;
@@ -157,7 +159,6 @@ public class CatDao {
 			pstmt.setInt(1, cnum);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
-				// hitUp(cnum) 들어가야함
 				hitUp(cnum);
 				String cname = rs.getString("cname");
 				String cgender = rs.getString("cgender");
@@ -198,7 +199,60 @@ public class CatDao {
 		}
 		return dto;
 	}
-
+	// hitup 없이 dto 가져오기
+	public CatDto catModifyContent(int cnum) {
+		CatDto dto = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM CAT C, CBREED CB" + 
+				"    WHERE C.CBREEDNO = CB.CBREEDNO" + 
+				"        AND CNUM= ? ";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cnum);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				String cname = rs.getString("cname");
+				String cgender = rs.getString("cgender");
+				Date cbirth = rs.getDate("cbirth");
+				int cprice = rs.getInt("cprice");
+				int cbreedno = rs.getInt("cbreedno");
+				String aid = rs.getString("aid");
+				String ccontent = rs.getString("ccontent");
+				String cimage1 = rs.getString("cimage1");
+				String cimage2 = rs.getString("cimage2");
+				String cimage3 = rs.getString("cimage3");
+				String cimage4 = rs.getString("cimage4");
+				String cimage5 = rs.getString("cimage5");
+				String cip = rs.getString("cip");
+				int chit = rs.getInt("chit");
+				int cr_check = rs.getInt("cr_check");
+				Date crdate = rs.getDate("crdate");
+				String cbreedname = rs.getString("cbreedname");
+				dto = new CatDto(cnum, cname, cgender, cbirth, cprice, cbreedno, aid, ccontent, cimage1, cimage2,
+						cimage3, cimage4, cimage5, cip, chit, cr_check, crdate, cbreedname);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage() + "상세보기 가져오기 실패" + dto);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return dto;
+	}
 	// 글 조회수 올리기
 	private void hitUp(int cnum) {
 		Connection conn = null;
@@ -260,7 +314,7 @@ public class CatDao {
 	}
 	
 	// 고양이 분양글 수정하기 
-	public int updateDog(CatDto dto) {
+	public int updateCat(CatDto dto) {
 		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -403,7 +457,79 @@ public class CatDao {
 			}
 			return result;
 		}
+		
+		// 고양이 나이계산
+		public int catAge(Date cbirth, int cnum) {
+			int age = 0;
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "SELECT TRUNC(MONTHS_BETWEEN(SYSDATE, ? )/12)*12+MOD(TRUNC(MONTHS_BETWEEN(SYSDATE, ? )),12) MONTH FROM CAT WHERE CNUM= ? ";
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setDate(1, cbirth);
+				pstmt.setDate(2, cbirth);
+				pstmt.setInt(3, cnum);
+				rs = pstmt.executeQuery();
+				rs.next();
+				age = rs.getInt(1);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			} finally {
+				try {
+					if (rs != null) {
+						rs.close();
+					}
+					if (pstmt != null) {
+						pstmt.close();
+					}
+					if (conn != null) {
+						conn.close();
+					}
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			return age;
+		}
+		
+		// 묘종 불러오기
+		public ArrayList<CbreedDto> breedList(){
+			ArrayList<CbreedDto> dtos = new ArrayList<CbreedDto>();
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			String sql = "SELECT * FROM CBREED";
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					int cbreedno = rs.getInt("cbreedno");
+					String cbreedname = rs.getString("cbreedname");
+					dtos.add(new CbreedDto(cbreedno, cbreedname));
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			} finally {
+				try {
+					if (rs != null) {
+						rs.close();
+					}
+					if (pstmt != null) {
+						pstmt.close();
+					}
+					if (conn != null) {
+						conn.close();
+					}
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+			return dtos;
+		}	
 	
-	
+		
 
 }

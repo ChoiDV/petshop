@@ -44,7 +44,19 @@
   <c:if test="${deleteResult eq 0 }">
   	<script>
   		alert('글 삭제에 실패하였습니다.');
+  		history.back();
   	</script>
+  </c:if>
+  <c:if test="${ReplyResult eq '1' }" >
+  	<script>
+  		alert('답글 작성 성공!');
+  	</script>
+  </c:if>
+  <c:if test="${ReplyResult eq '0' }">
+	<script>
+		alert('답글 작성 실패..');
+		history.back();
+	</script>  
   </c:if>
   <jsp:include page="../main/header.jsp"/>
   <div id="allform">
@@ -98,20 +110,20 @@
 		</table>
 		<div class="paging">
 			<c:if test="${startPage > BLOCKSIZE}">
-		 		 <a href="${conPath }/DogAllView.do?pageNum=1">&lt;&lt;</a> 
-		 		 <a href="${conPath }/DogAllView.do?pageNum=${startPage-1 }">&lt;</a> 
+		 		 <a href="${conPath }/freeBoardListView.do?pageNum=1">&lt;&lt;</a> 
+		 		 <a href="${conPath }/freeBoardListView.do?pageNum=${startPage-1 }">&lt;</a> 
 		 	</c:if>
 		 	<c:forEach var="i" begin="${startPage }" end="${endPage }">
 		 		<c:if test="${i eq pageNum }">
 		 			[ <b> ${i } </b> ]
 		 		</c:if>
 		 		<c:if test="${i != pageNum }">
-		 			[ <a href="${conPath }/DogAllView.do?pageNum=${i }">${i }</a> ]
+		 			[ <a href="${conPath }/freeBoardListView.do?pageNum=${i }">${i }</a> ]
 		 		</c:if>
 		 	</c:forEach>
 		 	<c:if test="${endPage < pageCnt }">
-		 		[ <a href="${conPath }/DogAllView.do?pageNum=${endPage+1 }">&gt;</a> ]
-		 		[ <a href="${conPath }/DogAllView.do?pageNum=${pageCnt}">&gt;&gt;</a> ]
+		 		[ <a href="${conPath }/freeBoardListView.do?pageNum=${endPage+1 }">&gt;</a> ]
+		 		[ <a href="${conPath }/freeBoardListView.do?pageNum=${pageCnt}">&gt;&gt;</a> ]
 		 	</c:if>
 		</div>
 		</div>

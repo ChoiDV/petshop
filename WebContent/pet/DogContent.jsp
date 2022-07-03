@@ -119,12 +119,13 @@
         <div id="precontent">
         	<pre>${dogContent.dcontent }</pre>
         
-        <div class="dogimage">  <img src="${conPath }/dogImage/${dogContent.dimage4 }" alt="dimage4" /></div>
-        <div class="dogimage">  <img src="${conPath }/dogImage/${dogContent.dimage5 }" alt="dimage5" /></div>
+        <div class="dogimage">  <img src="${conPath }/DogImageUpFolder/${dogContent.dimage4 }" alt="dimage4" /></div>
+        <div class="dogimage">  <img src="${conPath }/DogImageUpFolder/${dogContent.dimage5 }" alt="dimage5" /></div>
     	</div>
     </div>  <!--  id=dogContent_Form -->
     </div>  <!--  all form -->
     <div id="reply">
+        <c:if test="${empty admin }">
     	<form action="${conPath }/dogReplyInsert.do" method="post" >
     		<input type="hidden" name="dnum" value="${dogContent.dnum }">
     		<input type="hidden" name="pageNum" value="${pageNum }">
@@ -138,6 +139,7 @@
     		</tr>
     	</table>
     	</form>
+    	</c:if>
     	<table>
 			<c:if test="${replyList.size() eq 0 }">
 				<tr><td>등록된 댓글이 없습니다.</td></tr>
@@ -149,6 +151,12 @@
 						<td>작성자 id : ${reply.mid } </td>
 						<td>${reply.reply_content }</td>
 						<td><fmt:formatDate value="${reply.rdate }" type="date" pattern="YY.MM.dd HH:mm"/></td>
+						<c:if test="${( member.mid eq reply.mid ) or not empty admin }">
+							<td>
+								<button onclick="location='${conPath }/modifyDogReply.do'">수정</button>
+								<button onclick="location='${conPath }/deleteDogReply.do'">삭제</button>
+							</td>
+						</c:if>
 					</tr>
 				</c:forEach>
 			</c:if>

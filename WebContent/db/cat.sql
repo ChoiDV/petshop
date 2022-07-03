@@ -38,14 +38,14 @@ CREATE TABLE CAT(
 );
  -- 1. 고양이 분양 글 등록
 INSERT INTO CAT (CNUM, CNAME, CGENDER, CBIRTH, CPRICE, CBREEDNO, AID, CCONTENT, CIMAGE1, CIMAGE2,CIMAGE3,CIMAGE4,CIMAGE5, CIP)
-    VALUES(CAT_SEQ.NEXTVAL, '비범', 'F', '2021-06-24', 1000000, 30 , 'happycat', '예쁘고 귀여운 비범에요', 'bibum.jpg', null, null, null, null, '192.168.10.30' );
+    VALUES(CAT_SEQ.NEXTVAL, '진영이', 'F', '2021-06-24', 1000000, 30 , 'happycat', '예쁘고 귀여운 비범에요', 'bibum.jpg', null, null, null, null, '192.168.10.30' );
 
 
 -- 2. 고양이 목록 출력 (startRow ~ endRow )
 SELECT * FROM(SELECT ROWNUM RN, A.* FROM
                 (SELECT * FROM CAT ORDER BY CRDATE DESC) A) C, CBREED CB
     WHERE C.CBREEDNO = CB.CBREEDNO
-        AND RN BETWEEN 1 AND 12
+        AND RN BETWEEN 1 AND 20
             ORDER BY RN ;
 
 -- 3. 글 상세보기 (DNUM 으로 DTO 가져오기 )
@@ -75,7 +75,7 @@ UPDATE CAT SET CNAME='방비',
                           CIMAGE5='bambi5.jpg',
                            CIP ='192.162.13.01'
                     WHERE CNUM=1;
-
+DELETE CAT WHERE CNUM=1;
 -- 7. 글 삭제하기
 DELETE CAT WHERE CNUM=2;
 
@@ -86,8 +86,14 @@ UPDATE CAT SET CR_CHECK=0
 -- 9. 예약 취소
 UPDATE CAT SET CR_CHECK=1
     WHERE CNUM=1;
-    
 
-    
+-- 고양이 나이계산
+SELECT TRUNC(MONTHS_BETWEEN(SYSDATE, CBIRTH)/12)*12+MOD(TRUNC(MONTHS_BETWEEN(SYSDATE, CBIRTH)),12) MONTH FROM CAT WHERE CNUM=1;
+
+SELECT * FROM CBREED;    
 
 COMMIT;   
+
+SELECT CONSTRAINT_NAME, TABLE_NAME, R_CONSTRAINT_NAME
+    FROM USER_CONSTRAINTS WHERE CONSTRAINT_NAME = 'SYS_C007363';
+

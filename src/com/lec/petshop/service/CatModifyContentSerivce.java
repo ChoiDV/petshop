@@ -4,20 +4,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.lec.petshop.dao.AdminDao;
+import com.lec.petshop.dao.CatDao;
 import com.lec.petshop.dao.DogDao;
+import com.lec.petshop.dto.CatDto;
 import com.lec.petshop.dto.DogDto;
 
-public class DogModifyContentService implements Service {
+public class CatModifyContentSerivce implements Service {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		String pageNum = request.getParameter("pageNum");
-		int dnum = Integer.parseInt(request.getParameter("dnum"));
-		DogDao dao = DogDao.getInstance();
-		DogDto dog = dao.dogModifyContent(dnum);		
+		int cnum = Integer.parseInt(request.getParameter("cnum"));
+		CatDao dao = CatDao.getInstance();
+		CatDto cat = dao.catModifyContent(cnum);		
 		request.setAttribute("breedlist", dao.breedList());
-		request.setAttribute("dogModifyContent", dog);
-
+		request.setAttribute("catModifyContent", cat);
+		request.setAttribute("pageNum", pageNum);
 	}
 
 }

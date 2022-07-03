@@ -56,9 +56,9 @@
 				</ul></li>
 			<li><a href="#">Pretty Cat</a>
 				<ul class="submenu">
-					<li><a href="#">고양이 분양글 등록</a></li>
-					<li><a href="#">고양이 분양글 수정 </a></li>
-					<li><a href="#">고양이 분양글 삭제</a></li>
+					<li><a href="${conPath }/CatInsertView.do">고양이 분양글 등록</a></li>
+					<li><a href="${conPath }/adminPageCatListView.do">고양이 분양글 수정 </a></li>
+					<li><a href="${conPath }/adminPageCatListView.do">고양이 분양글 삭제</a></li>
 				</ul></li>
 			<c:if test="${not empty admin and (admin.aid eq 'admin' )}"> 
 			<li><a href="#">관리자/회원 관리</a>
