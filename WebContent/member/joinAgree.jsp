@@ -25,7 +25,8 @@
             margin: 10px;
             font-size: 2em;
             background-color: #ffd1dc;
-            border:1px solid black;
+            border-radius: 15px;
+            height:60px;
         }
         caption{
             font-size:2em;

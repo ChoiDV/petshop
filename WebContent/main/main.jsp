@@ -39,15 +39,16 @@
   	</c:if>
   	<jsp:include page="../main/header.jsp"/>
 	<table id="dogList">
-			<c:if test="${mainList.size() eq 0 }">
+		<caption>Popular Cute Dog</caption>
+			<c:if test="${mainDogList.size() eq 0 }">
 				<tr>
 					<td id="emptyDog" colspan="4">등록된 Cute Dog가 없습니다.</td>
 				</tr>
 			</c:if>
-			<c:if test="${mainList.size() != 0 }">
+			<c:if test="${mainDogList.size() != 0 }">
 				<tr>
 					<c:set var="i" value="0"/>
-					<c:forEach var="dog" items="${mainList }"> 
+					<c:forEach var="dog" items="${mainDogList }"> 
 						<td>
 							<a href="${conPath }/DogContentView.do?dnum=${dog.dnum } ">
 								<img src="${conPath }/DogImageUpFolder/${dog.dimage1 }" class="mainimage" alt="대표사진"  >
@@ -59,6 +60,32 @@
 							</tr><tr>
 						</c:if>
 						<c:set var="i" value="${i+1 }"/>
+					</c:forEach>
+				</tr>			
+			</c:if>
+		</table>		
+		<table id="dogList">
+			<caption>Popular Pretty Cat</caption>
+			<c:if test="${mainCatList.size() eq 0 }">
+				<tr>
+					<td id="emptyDog" colspan="4">등록된 Pretty Cat 가 없습니다.</td>
+				</tr>
+			</c:if>
+			<c:if test="${mainCatList.size() != 0 }">
+				<tr>
+					<c:set var="j" value="0"/>
+					<c:forEach var="cat" items="${mainCatList }"> 
+						<td>
+							<a href="${conPath }/CatContentView.do?cnum=${cat.cnum } ">
+								<img src="${conPath }/DogImageUpFolder/${cat.cimage1 }" class="mainimage" alt="대표사진"  >
+								<div class="dogname">${cat.cname }</div>
+								<div class="dogbreed">${cat.cbreedname }</div>
+							</a>
+						</td>
+						<c:if test="${j%3 == 2 and j!=8}">
+							</tr><tr>
+						</c:if>
+						<c:set var="j" value="${j+1 }"/>
 					</c:forEach>
 				</tr>			
 			</c:if>

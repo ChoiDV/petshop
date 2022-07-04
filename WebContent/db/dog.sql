@@ -112,9 +112,66 @@ COMMIT;
 -- 아이디 변경
 UPDATE MEMBER SET MID = 'aa'
                 WHERE MID='aaa';
-SELECT DBREEDNO, DBREEDNAME FROM DBREED;
+
 
 commit;
 
+-- 더미데이터
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- 연습장 ------------------------------------------------------
+SELECT * FROM DOG DOG, DBREED DB
+    WHERE DOG.DBREEDNO = DB.DBREEDNO
+        AND DNAME LIKE '%' || '동' || '%'
+            OR DBREEDNAME LIKE '%'||'동' || '%';
+
+
+
+SELECT * FROM CAT CAT, CBREED CB
+    WHERE CAT.CBREEDNO = CB.CBREEDNO
+        AND CNAME LIKE '%' || '동' || '%'
+            OR CBREEDNAME LIKE '%'||'동' || '%';
+
+SELECT * FROM CAT C, CBREED CB
+    WHERE C.CBREEDNO = CB.CBREEDNO;
+
+SELECT * FROM DOG D, DBREED DB
+    WHERE D.DBREEDNO = DB.DBREEDNO;
+
+SELECT * FROM (SELECT * FROM DOG D, DBREED DB WHERE D.DBREEDNO = DB.DBREEDNO) DOG,(SELECT * FROM CAT C, CBREED CB WHERE C.CBREEDNO = CB.CBREEDNO) CAT
+         WHERE (DOG.DNAME LIKE '%' || '동' || '%' OR DOG.DBREEDNAME LIKE 'Ma' || '%') 
+           OR   (CAT.CNAME LIKE '%' || '동' || '%' OR CAT.CBREEDNAME LIKE 'Ma' || '%' );
+-- dog 검색
+SELECT DNUM, DNAME, DIMAGE1 FROM DOG DOG, DBREED DB
+    WHERE DOG.DBREEDNO = DB.DBREEDNO
+        AND DNAME LIKE '%' || '동' || '%'
+            OR DBREEDNAME LIKE '%'||'동' || '%';
+SELECT CNUM DNUM, CNAME DNAME, CIMAGE1 DIMAGE1 FROM CAT CAT, CBREED CB
+    WHERE CAT.CBREEDNO = CB.CBREEDNO
+        AND CNAME LIKE '%' || '동' || '%'
+            OR CBREEDNAME LIKE '%'||'동' || '%';
+
+    
 

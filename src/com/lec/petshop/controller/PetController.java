@@ -19,6 +19,8 @@ import com.lec.petshop.service.CatDeleteViewService;
 import com.lec.petshop.service.CatInsertService;
 import com.lec.petshop.service.CatModifyContentSerivce;
 import com.lec.petshop.service.CatModifyService;
+import com.lec.petshop.service.CatReplyDeleteSerivice;
+import com.lec.petshop.service.CatReplyDeleteViewService;
 import com.lec.petshop.service.CatReplyService;
 import com.lec.petshop.service.DogAllService;
 import com.lec.petshop.service.DogBreedService;
@@ -27,7 +29,11 @@ import com.lec.petshop.service.DogDeleteService;
 import com.lec.petshop.service.DogDeleteViewService;
 import com.lec.petshop.service.DogInsertService;
 import com.lec.petshop.service.DogModifyContentService;
+import com.lec.petshop.service.DogModifyReplyService;
+import com.lec.petshop.service.DogModifyReplyViewService;
 import com.lec.petshop.service.DogModifyService;
+import com.lec.petshop.service.DogReplyDeleteService;
+import com.lec.petshop.service.DogReplyDeleteViewService;
 import com.lec.petshop.service.DogReplyService;
 import com.lec.petshop.service.FreeBoardContentService;
 import com.lec.petshop.service.FreeBoardDeleteService;
@@ -46,6 +52,10 @@ import com.lec.petshop.service.MModifyAllService;
 import com.lec.petshop.service.MModifyAllViewService;
 import com.lec.petshop.service.MainService;
 import com.lec.petshop.service.Service;
+import com.lec.petshop.service.deleteCatZimService;
+import com.lec.petshop.service.deleteZimservice;
+import com.lec.petshop.service.insertCatZimService;
+import com.lec.petshop.service.insertZimservice;
 
 /**
  * Servlet implementation class PetController
@@ -67,6 +77,8 @@ public class PetController extends HttpServlet {
 	private boolean catInsertForm = false;
 	private boolean catModifyForm = false;
 	private boolean catDeleteForm = false;
+	private boolean dogReplyDeleteForm = false;
+	private boolean catReplyDeleteForm = false;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		actionDo(request, response);
@@ -140,7 +152,7 @@ public class PetController extends HttpServlet {
 			service = new DogAllService();
 			service.execute(request, response);
 			viewPage = "pet/DogAllView.jsp";
-		} else if(command.equals("/DogContentView.do")) {  // Cute Dog -> 전체보기 -> 특정 강아지 content
+		} else if(command.equals("/DogContentView.do")) {  // 특정 강아지 content
 			service = new DogContentService();
 			service.execute(request, response);
 			viewPage = "pet/DogContent.jsp";
@@ -308,7 +320,63 @@ public class PetController extends HttpServlet {
 			service = new CatReplyService();
 			service.execute(request, response);
 			viewPage = "CatContentView.do";
+		} else if(command.equals("/deleteDogReplyView.do")) {
+			service = new DogReplyDeleteViewService();
+			service.execute(request, response);
+			viewPage = "pet/DogDeleteReplyView.jsp";	
+			dogReplyDeleteForm = true;
+		} else if(command.equals("/DogDeleteReply.do")) {
+			if(dogReplyDeleteForm) {
+				service = new DogReplyDeleteService();
+				service.execute(request, response);
+			}
+			viewPage = "DogContentView.do";
+			dogReplyDeleteForm = false;
+		} else if(command.equals("/deleteCatReplyView.do")){ 
+			service = new CatReplyDeleteViewService();
+			service.execute(request, response);
+			viewPage = "pet/CatDeleteReplyView.jsp";
+			catReplyDeleteForm = true;
+		} else if(command.equals("/CatDeleteReply.do")) {
+			if(catReplyDeleteForm) {
+				service = new CatReplyDeleteSerivice();
+				service.execute(request, response);
+			}
+			viewPage = "CatContentView.do";
+			catReplyDeleteForm = false;
+		} else if(command.equals("/insertZim.do")) {
+			service = new insertZimservice(); 
+			service.execute(request, response);
+			viewPage = "DogContentView.do";
+			
+		} else if(command.equals("/deleteZim.do")) {
+			service = new deleteZimservice();
+			service.execute(request, response);
+			viewPage = "DogContentView.do";
+		} else if(command.equals("/insertCatZim.do")) {
+			service = new insertCatZimService();
+			service.execute(request, response);
+			viewPage = "CatContentView.do";
+		} else if(command.equals("/deleteCatZim.do")) {
+			service = new deleteCatZimService();
+			service.execute(request, response);
+			viewPage = "CatContentView.do";
 		}
+		
+		
+		
+		
+		
+		//else if(command.equals("/modifyDogReplyView.do")) {
+//			service = new DogModifyReplyViewService();
+//			service.execute(request, response);
+////			viewPage = "DogContentView.do";		
+//			viewPage = "pet/DogModifyReplyView.jsp";
+//		} else if(command.equals("/modifyDogReply.do")) {
+//			service = new DogModifyReplyService();
+//			service.execute(request, response);
+//			viewPage = "DogContentView.do";
+//		} 
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
 		

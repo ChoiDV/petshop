@@ -2,13 +2,14 @@ package com.lec.petshop.service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.lec.petshop.dao.AdminDao;
 import com.lec.petshop.dao.DogDao;
 import com.lec.petshop.dao.Dog_ReplyDao;
-import com.lec.petshop.dao.FreeBoardDao;
-import com.lec.petshop.dto.AdminDto;
+import com.lec.petshop.dao.ZimDao;
 import com.lec.petshop.dto.DogDto;
+import com.lec.petshop.dto.MemberDto;
 
 public class DogContentService implements Service {
 
@@ -68,7 +69,16 @@ public class DogContentService implements Service {
 		request.setAttribute("replyPageNum", currentReplyPage);
 		request.setAttribute("pageCnt", pageCnt);
 		
-		
+		// 찜
+		HttpSession session = request.getSession();
+		MemberDto member = (MemberDto)session.getAttribute("member");
+		String mid = request.getParameter("mid");
+		if(mid==null && member!=null) {
+			mid = member.getMid();
+		}
+		ZimDao zdao = ZimDao.getInstance();
+		int result = zdao.zimCheck(mid, dnum);
+		request.setAttribute("ZimCount", result);
 	}
 
 }

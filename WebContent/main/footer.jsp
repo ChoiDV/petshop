@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 <style>
 	
-	footer {height:100px; background-color: #ffd1dc;}
+	footer {height:100px; background-color: #ffd1dc; margin-top:50px;}
 	footer #footer_conts, footer #footer_conts a {
 		
 		color:black;

@@ -10,14 +10,33 @@
   <title>Insert title here</title>
   <link href="${conPath }/css/content.css" rel="stylesheet">
  <style>
- 
+ *{
+ 	font-family: 'NanumSquareRoundLight';
+	font-family: 'NanumSquareRound';
+	font-family: 'NanumSquareRoundBold';
+	font-family: 'NanumSquareRoundExtraBold';
+ }
+ .heart {
+ 	width:100px;
+ }
  </style>
+ <link href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-round.css" rel="stylesheet">
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <script>
  	$(document).ready(function(){
- 		
- 	});
- </script>  
+		$('.heart').click(function(){
+			var zimno = Number('${ZimCount }');
+			if(zimno==0){
+				$(this).attr('src','img/빈하트.png');
+				location.href='${conPath}/insertZim.do?dnum='+'${dogContent.dnum}&mid='+'${member.mid}';
+			}else if(zimno>=1){
+				zimno=0;
+				$(this).attr('src','img/하트.png');
+				location.href='${conPath}/deleteZim.do?dnum='+'${dogContent.dnum }&mid='+'${member.mid}';
+			}
+		});
+	});
+ </script>
 </head>
   <body>
   <c:if test="${empty member and empty admin}">
@@ -34,8 +53,42 @@
   <c:if test="${replyResult eq 0 }">
   	<script>
   		alert('댓글 작성 실패');
+  	</script>  	
+  </c:if>
+  <c:if test="${DogReplyDeleteResult eq 1 }">
+  	<script>
+		alert('댓글 삭제 성공');
   	</script>
   </c:if>
+  <c:if test="${DogReplyDeleteResult eq 0 }">
+  	<script>
+  		alert('댓글 삭제 실패');
+  	</script>
+  </c:if> 
+  
+  <c:if test="${zimResult eq 1 }">
+  	<script>
+		alert('찜목록 추가 성공 ');
+  	</script>
+  </c:if>
+  <c:if test="${zimResult eq 0 }">
+  	<script>
+  		alert('찜목록 추가 실패');
+  	</script>
+  </c:if>
+  
+  <c:if test="${noZimResult eq 1 }">
+  	<script>
+		alert('찜목록 삭제 성공 ');
+  	</script>
+  </c:if>
+  <c:if test="${noZimResult eq 0 }">
+  	<script>
+  		alert('찜목록 삭제 실패');
+  	</script>
+  </c:if>
+   
+  
   <jsp:include page="../main/header.jsp" />
   <div id="AllForm">
 	<table id="bar">
@@ -58,6 +111,14 @@
         <div class="dogimage">  <img src="${conPath }/DogImageUpFolder/${dogContent.dimage2 }" alt="dimage2" /></div>
         <div class="dogimage">  <img src="${conPath }/DogImageUpFolder/${dogContent.dimage3 }" alt="dimage3" /></div>
         <div id="CuteDog"> Cute Dog </div>
+        <div>
+			<c:if test="${ZimCount eq 0 }">
+				<img src="${conPath }/img/빈하트.png" class="heart">
+			</c:if>
+			<c:if test="${ZimCount >= 1 }">
+				<img src="${conPath }/img/하트.png" class="heart">			
+			</c:if>
+        </div>
         <table id="mainContent">
             <tr>
                 <th>이름</th>
@@ -119,17 +180,17 @@
         <div id="precontent">
         	<pre>${dogContent.dcontent }</pre>
         
-        <div class="dogimage">  <img src="${conPath }/DogImageUpFolder/${dogContent.dimage4 }" alt="dimage4" /></div>
-        <div class="dogimage">  <img src="${conPath }/DogImageUpFolder/${dogContent.dimage5 }" alt="dimage5" /></div>
+        <div class="dogimage"><img src="${conPath }/DogImageUpFolder/${dogContent.dimage4 }" alt="dimage4" /></div>
+        <div class="dogimage"><img src="${conPath }/DogImageUpFolder/${dogContent.dimage5 }" alt="dimage5" /></div>
     	</div>
     </div>  <!--  id=dogContent_Form -->
     </div>  <!--  all form -->
-    <div id="reply">
-        <c:if test="${empty admin }">
-    	<form action="${conPath }/dogReplyInsert.do" method="post" >
+     <div id="reply"> 
+        <c:if test="${empty admin }"> 
+    	<form action="${conPath }/dogReplyInsert.do" method="post" > 
     		<input type="hidden" name="dnum" value="${dogContent.dnum }">
-    		<input type="hidden" name="pageNum" value="${pageNum }">
-    	<table>
+    		<input type="hidden" name="replyPageNum" value="${replyPageNum }"> 
+  	<table> 
     		<caption>${dogContent.dname } 에게 한마디</caption>
     		<tr>
     			<td>
@@ -153,15 +214,15 @@
 						<td><fmt:formatDate value="${reply.rdate }" type="date" pattern="YY.MM.dd HH:mm"/></td>
 						<c:if test="${( member.mid eq reply.mid ) or not empty admin }">
 							<td>
-								<button onclick="location='${conPath }/modifyDogReply.do'">수정</button>
-								<button onclick="location='${conPath }/deleteDogReply.do'">삭제</button>
-							</td>
-						</c:if>
+							<button onclick="location='${conPath }/modifyDogReplyView.do?rno=${reply.rno }&dnum=${dogContent.dnum }&replyPageNum=${replyPageNum }'">수정</button>
+							<button onclick="location='${conPath }/deleteDogReplyView.do?rno=${reply.rno }&dnum=${dogContent.dnum }'">삭제</button>
+						</td> 
+						</c:if> 
 					</tr>
 				</c:forEach>
 			</c:if>
     	</table>
-    </div>
+    </div> 
 	<jsp:include page="../main/footer.jsp" />
   </body>
 </html>

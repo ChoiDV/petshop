@@ -39,10 +39,12 @@
 			</div>
 			<div id="left_gnb">
 				<ul>
-					<li><input type="text" name="search" />
-					<button class="searchbutton">
+					<li>
+						<input type="text" name="search" />
+						<button class="searchbutton" onclick="location='${conPath}/Search ? '">
 							<img src="${conPath }/img/돋보기1.PNG" class="searchimg">
-						</button></li>
+						</button>
+					</li>
 				</ul>
 			</div>
 			<div id="logo">

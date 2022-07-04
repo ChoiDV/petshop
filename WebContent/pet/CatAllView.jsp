@@ -23,6 +23,7 @@
 	<body>
 	<jsp:include page="../main/header.jsp" />
 		<table id="List">
+			<caption>Pretty Cat</caption>
 			<c:if test="${catList.size() eq 0 }">
 				<tr>
 					<td id="empty" colspan="4">등록된 Pretty Cat 가 없습니다.</td>

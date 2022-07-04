@@ -36,7 +36,7 @@
  					if($('#idConfirmResult').html().trim() == '중복된 ID 입니다.' ){
  						$('#idConfirmResult').css('color','red');
  					}else{
- 						$('#idConfirmResult').css('color','black');
+ 						$('#idConfirmResult').css('color','green');
  					}
  				}
  			});  // ajax함수
@@ -47,7 +47,7 @@
 			var mpwChk = $('input[name="mpwChk"]').val();
 			if (mpw == mpwChk) {
 				$('#pwChkResult').html('OK');
-				$('#pwChkResult').css('color','black');
+				$('#pwChkResult').css('color','green');
 			} else {
 				$('#pwChkResult').html('No');
 				$('#pwChkResult').css('color','red');
@@ -77,7 +77,31 @@
 				$('#patternBirth').html('올바른 생년월일 6자리를 입력해주세요.');
 				$('#patternBirth').css('color','red');
 			}
-		});
+		}); // 생년월일 6 자리 keyup 이벤트
+		$('form').submit(function(){
+				var idConfirmResult = $('#idConfirmResult').text().trim();
+				var patternResult = $('#patternResult').text().trim();
+				var pwChkResult = $('#pwChkResult').text().trim();
+				var patternBirth = $('#patternBirth').text().trim();
+				if(idConfirmResult != '사용가능한 ID 입니다.'){
+					alert('사용가능한 ID로 가입해주세요.');
+					$('#idConfirmResult').focus();
+					return false;
+				} else if(patternResult != '안전'){
+					alert('비밀번호 형식을 지켜주세요');
+					$('#patternResult').focus();
+					return false;
+				} else if(pwChkResult != 'OK'){
+					alert('두 비밀번호가 다릅니다.');
+					$('#pwChkResult').focus();
+					return false;
+				} else if(patternBirth != 'OK'){
+					alert('생년월일 6자리를 입력해주세요.');
+					$('#patternBirth').focus();
+					return false;
+				}
+				
+		});  // form submit 이벤트 
  	});  // ready
  	
  </script>  
@@ -169,7 +193,7 @@
                 <tr>
                     <td colspan="4">
                         <input type="submit" value="회원가입" class="btn">
-                        <input type="button" value="뒤로가기" onclick="location.href='hisory.back()'" class="btn">
+                        <input type="button" value="뒤로가기" onclick="location.href='history.back()'" class="btn">
                     </td>
                 </tr>
             </table>

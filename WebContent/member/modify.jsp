@@ -10,7 +10,7 @@
   <title>Insert title here</title>
   <link href="${conPath }/css/modify.css" rel="stylesheet">
  <style>
- 
+   
  </style>
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <script>
@@ -28,11 +28,11 @@
 </head>
   <body>
 	<jsp:include page="../main/header.jsp" />
-	<div class="form">
+	<div id="form">
 		<jsp:include page="../main/MyPageMenu.jsp"/>	
 		<form action="${conPath }/modifyAllView.do" method="post">
 			<input type="hidden" id="chk" name="chK" value="${param.modify }">
-			<table id="checkPassword">
+			<table id="input_form">
 			<caption>비밀번호 확인</caption>
 			 <tr>
 			 	<th>비밀번호</th>
@@ -48,6 +48,7 @@
 			</table>
 		</form>
 	</div>
+	
 	<jsp:include page="../main/footer.jsp" />
   </body>
 </html>

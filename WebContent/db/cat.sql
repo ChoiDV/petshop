@@ -47,7 +47,13 @@ SELECT * FROM(SELECT ROWNUM RN, A.* FROM
     WHERE C.CBREEDNO = CB.CBREEDNO
         AND RN BETWEEN 1 AND 20
             ORDER BY RN ;
-
+            
+-- hit 수로 메인페이지에 출력할 고양이
+SELECT * FROM(SELECT ROWNUM RN, A.* FROM
+                        (SELECT * FROM CAT ORDER BY CHIT DESC ) A) C, CBREED CB
+            WHERE C.CBREEDNO = CB.CBREEDNO
+                AND RN BETWEEN 1 AND 9
+                    ORDER BY RN;
 -- 3. 글 상세보기 (DNUM 으로 DTO 가져오기 )
 SELECT * FROM CAT C, CBREED CB
     WHERE C.CBREEDNO = CB.CBREEDNO
@@ -93,7 +99,11 @@ SELECT TRUNC(MONTHS_BETWEEN(SYSDATE, CBIRTH)/12)*12+MOD(TRUNC(MONTHS_BETWEEN(SYS
 SELECT * FROM CBREED;    
 
 COMMIT;   
-
+rollback;
 SELECT CONSTRAINT_NAME, TABLE_NAME, R_CONSTRAINT_NAME
     FROM USER_CONSTRAINTS WHERE CONSTRAINT_NAME = 'SYS_C007363';
 
+select * from cat_reply;
+delete from cat where cnum=15;
+delete from cat_reply where cnum=15;
+commit;

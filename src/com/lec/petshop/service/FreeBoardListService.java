@@ -13,7 +13,6 @@ public class FreeBoardListService implements Service {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		String pageNum = request.getParameter("pageNum");
-		String result = request.getParameter("ReplyResult");
 		if(pageNum == null || pageNum.equals("")) {
 			if(request.getAttribute("pageNum")==null) {
 				pageNum = "1";
@@ -40,7 +39,6 @@ public class FreeBoardListService implements Service {
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageNum", currentPage);
 		request.setAttribute("pageCnt", pageCnt);
-		request.setAttribute("ReplyResult", result);
 		
 	}
 

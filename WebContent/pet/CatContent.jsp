@@ -10,13 +10,25 @@
   <title>Insert title here</title>
   <link href="${conPath }/css/content.css" rel="stylesheet">
  <style>
- 
+ .heart {
+ 	width:100px;
+ }
  </style>
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <script>
- 	$(document).ready(function(){
- 		
- 	});
+ $(document).ready(function(){
+		$('.heart').click(function(){
+			var zimno = Number('${ZimCount }');
+			if(zimno==0){
+				$(this).attr('src','img/빈하트.png');
+				location.href='${conPath}/insertCatZim.do?cnum='+'${catContent.cnum}&mid='+'${member.mid}';
+			}else if(zimno>=1){
+				zimno=0;
+				$(this).attr('src','img/하트.png');
+				location.href='${conPath}/deleteCatZim.do?cnum='+'${catContent.cnum }&mid='+'${member.mid}';
+			}
+		});
+	});
  </script>  
 </head>
   <body>
@@ -35,7 +47,40 @@
   	<script>
   		alert('댓글 작성 실패');
   	</script>
+  </c:if>  
+    <c:if test="${CatReplyDeleteResult eq 1 }">
+  	<script>
+		alert('댓글 삭제 성공');
+  	</script>
   </c:if>
+  <c:if test="${CatReplyDeleteResult eq 0 }">
+  	<script>
+  		alert('댓글 삭제 실패');
+  	</script>
+  </c:if>
+   <c:if test="${zimResult eq 1 }">
+  	<script>
+		alert('찜목록 추가 성공 ');
+  	</script>
+  </c:if>
+  <c:if test="${zimResult eq 0 }">
+  	<script>
+  		alert('찜목록 추가 실패');
+  	</script>
+  </c:if>
+  
+  <c:if test="${noZimResult eq 1 }">
+  	<script>
+		alert('찜목록 삭제 성공 ');
+  	</script>
+  </c:if>
+  <c:if test="${noZimResult eq 0 }">
+  	<script>
+  		alert('찜목록 삭제 실패');
+  	</script>
+  </c:if>  
+  
+  
   <jsp:include page="../main/header.jsp" />
   <div id="AllForm">
 	<table id="bar">
@@ -58,6 +103,14 @@
         <div class="dogimage">  <img src="${conPath }/DogImageUpFolder/${catContent.cimage2 }" alt="cimage2" /></div>
         <div class="dogimage">  <img src="${conPath }/DogImageUpFolder/${catContent.cimage3 }" alt="cimage3" /></div>
         <div id="CuteDog"> Pretty Cat </div>
+        <div>
+			<c:if test="${ZimCount eq 0 }">
+				<img src="${conPath }/img/빈하트.png" class="heart">
+			</c:if>
+			<c:if test="${ZimCount >= 1 }">
+				<img src="${conPath }/img/하트.png" class="heart">			
+			</c:if>
+        </div>
         <table id="mainContent">
             <tr>
                 <th>이름</th>
@@ -151,6 +204,12 @@
 						<td>작성자 id : ${reply.mid } </td>
 						<td>${reply.reply_content }</td>
 						<td><fmt:formatDate value="${reply.rdate }" type="date" pattern="YY.MM.dd HH:mm"/></td>
+						<c:if test="${( member.mid eq reply.mid ) or not empty admin }">
+							<td>
+								<button onclick="location='${conPath }/modifyCatReplyView.do?rno=${reply.rno }&cnum=${catContent.cnum }&pageNum=${pageNum }'">수정</button>
+								<button onclick="location='${conPath }/deleteCatReplyView.do?rno=${reply.rno }&cnum=${catContent.cnum }'">삭제</button>
+							</td>
+						</c:if>
 					</tr>
 				</c:forEach>
 			</c:if>

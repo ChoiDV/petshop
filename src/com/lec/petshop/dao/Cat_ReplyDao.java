@@ -211,4 +211,44 @@ public class Cat_ReplyDao {
 		}
 		return totalRCnt;
 	}
+	
+	// 특정 고양이의 댓글 출력
+	public ArrayList<Cat_ReplyDto> replyListCat(int cnum){
+		ArrayList<Cat_ReplyDto> dtos = new ArrayList<Cat_ReplyDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM CAT_REPLY WHERE CNUM= ?";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cnum);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				int rno = rs.getInt("rno");
+				String mid = rs.getString("mid");
+				String reply_content = rs.getString("reply_content");
+				Date rdate = rs.getDate("rdate");
+				String rip = rs.getString("rip");
+				dtos.add(new Cat_ReplyDto(0, rno, cnum, mid, reply_content, rdate, rip));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage() + cnum + " 번 댓글 출력");
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return dtos;
+	}
 }

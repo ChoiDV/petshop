@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
   <title>Insert title here</title>
-  <link href="${conPath }/css/style.css" rel="stylesheet">
+  <link href="${conPath }/css/FreeBoard.css" rel="stylesheet">
  <style>
  	.left{text-align: left;}
  </style>
@@ -47,27 +47,21 @@
   		history.back();
   	</script>
   </c:if>
-  <c:if test="${ReplyResult eq '1' }" >
+  <c:if test="${ReplyResult eq 1 }" >
   	<script>
   		alert('답글 작성 성공!');
   	</script>
   </c:if>
-  <c:if test="${ReplyResult eq '0' }">
+  <c:if test="${ReplyResult eq 0 }">
 	<script>
 		alert('답글 작성 실패..');
 		history.back();
 	</script>  
   </c:if>
   <jsp:include page="../main/header.jsp"/>
-  <div id="allform">
-		<table>
-			<caption>Communication</caption>
-			<tr>
-				<td>
-					<a href="${conPath }/freeBoardWriteView.do">글 쓰기</a>
-				</td>
-			</tr>
-		</table>
+  <div id="allform">	
+			<div>Communication</div>
+			<div class="write_board"><a href="${conPath }/freeBoardWriteView.do">글 쓰기</a></div>
 		<table>
 			<tr>
 				<th>글 번호</th>

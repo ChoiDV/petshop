@@ -23,6 +23,7 @@
   	
 	<jsp:include page="../main/header.jsp" />
 		<table id="List">
+			<caption>Cute Dog</caption>
 			<c:if test="${dogList.size() eq 0 }">
 				<tr>
 					<td id="empty" colspan="4">등록된 Cute Dog가 없습니다.</td>
@@ -33,12 +34,12 @@
 					<c:set var="i" value="0"/>
 					<c:forEach var="dog" items="${dogList }"> 
 						<td>
-							<a href="${conPath }/DogContentView.do?pageNum=${pageNum }&dnum=${dog.dnum } ">
+							<a href="${conPath }/DogContentView.do?pageNum=${pageNum }&dnum=${dog.dnum }">
 								<img src="${conPath }/DogImageUpFolder/${dog.dimage1 }" class="mainimage" alt="대표사진"  >
 								<div class="name">${dog.dname }</div>
 								<div class="breed">${dog.dbreedname }</div>
 							</a>
-						</td>
+						</td>						
 						<c:if test="${i%4 == 3 and i!=11}">
 							</tr><tr>
 						</c:if>

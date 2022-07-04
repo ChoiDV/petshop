@@ -57,9 +57,8 @@
                 <tr>
                     <th>묘종</th>
                     <td>
-                        <input type="text" name="cbreedno" list="cbreedname" required="required">
+                        <input type="text" name="cbreedno" list="cbreedname" required="required"  value="${catModifyContent.cbreedno }">
                         <datalist id="cbreedname" >
-                        	<option value="${catModifyContent.cbreedno }">${catModifyContent.cbreedname }</option>
                             <c:forEach var="list" items="${breedlist }">
                                 <option value="${list.cbreedno }">${list.cbreedname }</option>
                             </c:forEach>

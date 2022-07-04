@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-decoration: none;
+	color: black;
+}
+
+#allform {
+	background-color: #ffd1dc;
+	width: 1200px;
+	margin: 150px auto;
+	border-radius: 0 0 15px 15px;
+}
+
+#allform table {
+	border: 1px solid white;
+	width: 1100px;
+	margin: 0 auto;
+	padding: 5px;
+	background-color: white;
+	border-radius: 15px;
+}
+
+#allform div:first-child {
+	width: 1200px;
+	margin-bottom: 20px;
+	font-size: 2.5em;
+	font-weight: bold;
+	box-sizing: border-box;
+	border: 5px double white;
+	padding: 10px;
+	text-align: center;
+	text-shadow: +4px 0 white;
+}
+
+#allform .write_board {
+	text-align: right;
+	padding-right: 50px;
+	height: 50px;
+	text-decoration: underline;
+	text-shadow: -1px 0 #000;
+}
+
+#allform td:nth-child(1) {
+	text-align: center;
+	width: 100px;
+}
+
+#allform td:nth-child(2) {
+	text-align: center;
+	width: 100px;
+}
+
+#allform td:nth-child(3) {
+	text-align: left;
+	width: 300px;
+	padding-left: 10px;
+}
+
+#allform td:nth-child(4) {
+	text-align: center;
+	width: 200px;
+}
+
+#allform td:nth-child(5) {
+	text-align: center;
+	width: 100px;
+}
+
+#allform td {
+	border: 1px solid white;
+	height: 50px;
+	line-height: 50px;
+	font-weight: bold;
+	background-color: #ffd1dc;
+	border-radius: 15px;
+}
+
+#allform th {
+	padding: 10px;
+}
+
+#allform .paging {
+	text-align: center;
+	width: 500px;
+	margin: 30px auto;
+	padding-bottom: 20px;
+}
