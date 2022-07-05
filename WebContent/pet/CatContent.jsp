@@ -82,7 +82,7 @@
   
   
   <jsp:include page="../main/header.jsp" />
-  <div id="AllForm">
+  <div id="dogContent_Form">
 	<table id="bar">
 		<tr>
 			<td>
@@ -100,8 +100,6 @@
         <div id="profile"> 프로필</div>
         <div id="profile_eng"> All PET PROFILE </div>
         <div class="dogimage">  <img src="${conPath }/DogImageUpFolder/${catContent.cimage1 }" alt="cimage1" /></div>
-        <div class="dogimage">  <img src="${conPath }/DogImageUpFolder/${catContent.cimage2 }" alt="cimage2" /></div>
-        <div class="dogimage">  <img src="${conPath }/DogImageUpFolder/${catContent.cimage3 }" alt="cimage3" /></div>
         <div id="CuteDog"> Pretty Cat </div>
         <div>
 			<c:if test="${ZimCount eq 0 }">
@@ -169,15 +167,24 @@
 	        	</td>
 	        </tr>
         </table>
-        <div id="precontent">
-        	<pre>${catContent.ccontent }</pre>
-        
-        <div class="dogimage">  <img src="${conPath }/dogImageUpFolder/${catContent.cimage4 }" alt="dimage4" /></div>
-        <div class="dogimage">  <img src="${conPath }/dogImageUpFolder/${catContent.cimage5 }" alt="dimage5" /></div>
+        <div id="dcontent">
+        	<pre>${catContent.ccontent }</pre>       
     	</div>
+    	        <c:if test="${catContent.cimage2 != null }">
+	        <div class="dogimage">  <img src="${conPath }/DogImageUpFolder/${catContent.cimage2 }" alt="cimage2" /></div>
+        </c:if>
+                <c:if test="${catContent.cimage3 != null }">
+	        <div class="dogimage">  <img src="${conPath }/DogImageUpFolder/${catContent.cimage3 }" alt="cimage2" /></div>
+        </c:if>
+                <c:if test="${catContent.cimage4 != null }">
+	        <div class="dogimage">  <img src="${conPath }/DogImageUpFolder/${catContent.cimage4 }" alt="cimage2" /></div>
+        </c:if>
+                <c:if test="${catContent.cimage5 != null }">
+	        <div class="dogimage">  <img src="${conPath }/DogImageUpFolder/${catContent.cimage5 }" alt="cimage2" /></div>
+        </c:if>
     </div>  <!--  id=dogContent_Form -->
     </div>  <!--  all form -->
-    <div id="reply">
+    <div class="reply">
     <c:if test="${empty admin }">
     	<form action="${conPath }/catReplyInsert.do" method="post" >
     		<input type="hidden" name="cnum" value="${catContent.cnum }">
@@ -193,7 +200,7 @@
     	</table>
     	</form>
     </c:if>	
-    	<table>
+    	<table class="reply_content">
 			<c:if test="${replyList.size() eq 0 }">
 				<tr><td>등록된 댓글이 없습니다.</td></tr>
 			</c:if>

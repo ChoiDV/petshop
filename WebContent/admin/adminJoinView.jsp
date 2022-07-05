@@ -23,7 +23,6 @@
 </head>
   <body>
   <jsp:include page="../main/header.jsp" />
-  <jsp:include page="../admin/adminPageMenu.jsp" />
   		<div id="join_form">
   			<form action="${conPath }/adminJoin.do" method="post">
   				<table>

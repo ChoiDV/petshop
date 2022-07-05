@@ -8,9 +8,15 @@
 <head>
 <meta charset="UTF-8">
   <title>Insert title here</title>
-  <link href="${conPath }/css/style.css" rel="stylesheet">
+  <link href="${conPath }/css/doginsert.css" rel="stylesheet">
  <style>
- 
+ caption {
+		font-weight: bold;
+		font-size: 3em;
+		color: white;
+		margin-bottom: 30px;
+   		text-shadow:-1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+	}
  </style>
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <script>
@@ -23,7 +29,6 @@
 </head>
   <body>
 	<jsp:include page="../main/header.jsp"/>
-  	<jsp:include page="../admin/adminPageMenu.jsp"/>
 	<div id="form">
         <form action="${conPath }/CatModify.do" method="post" enctype="multipart/form-data">
         	<input type="hidden" name="cnum" value="${catModifyContent.cnum }">

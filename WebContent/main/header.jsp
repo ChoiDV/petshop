@@ -15,6 +15,7 @@
 }
 .searchbutton {
 	border:none;
+	background-color:#ffd1dc;
 }
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -41,14 +42,14 @@
 				<ul>
 					<li>
 						<input type="text" name="search" />
-						<button class="searchbutton" onclick="location='${conPath}/Search ? '">
+						<button class="searchbutton" onclick="#">
 							<img src="${conPath }/img/돋보기1.PNG" class="searchimg">
 						</button>
 					</li>
 				</ul>
 			</div>
 			<div id="logo">
-				<a href="${conPath }/main.do">로고</a>
+				<a href="${conPath }/main.do"><img src="${conPath }/img/logo2.PNG" alt="logo" width="570" height="160"></a>
 			</div>
 		</div>
 		<div id="lnb">
@@ -69,7 +70,7 @@
 					<ol class="subMenu">
 						<li><a href="${conPath }/DogAllView.do"><img src="${conPath }/img/전체보기.jpg" /></a></li>
 						<li><a href="#"><img src="${conPath }/img/프리미엄.jpg" /></a></li>
-						<li><a href="#"><img src="${conPath }/img/견종별 모아보기.jpg" /></a></li>
+						<li><a href="${conPath }/DogBreedView.do"><img src="${conPath }/img/견종별 모아보기.jpg" /></a></li>
 						<li><a href="#"><img src="${conPath }/img/지점별 모아보기.jpg" /></a></li>
 						<li class="text">전체 보기</li>
 						<li class="text">프리 미엄</li>
@@ -81,7 +82,7 @@
 					<ol class="subMenu">
 						<li><a href="${conPath }/CatAllView.do"><img src="${conPath }/img/고양이전체보기.jpg" /></a></li>
 						<li><a href="#"><img src="${conPath }/img/고양이프리미엄.jpg" /></a></li>
-						<li><a href="#"><img src="${conPath }/img/묘종별모아보기.jpg" /></a></li>
+						<li><a href="${conPath }/CatBreedView.do"><img src="${conPath }/img/묘종별모아보기.jpg" /></a></li>
 						<li><a href="#"><img src="${conPath }/img/지점별 모아보기.jpg" /></a></li>
 						<li class="text">전체 보기</li>
 						<li class="text">프리 미엄</li>
@@ -127,7 +128,7 @@
 				</ul>
 			</div>
 			<div id="logo">
-				<a href="${conPath }/main.do">로고</a>
+				<a href="${conPath }/main.do"><img src="${conPath }/img/logo2.PNG" alt="logo" width="570" height="160"></a>
 			</div>
 		</div>
 		<div id="lnb">
@@ -148,7 +149,7 @@
 					<ol class="subMenu">
 						<li><a href="${conPath }/DogAllView.do"><img src="${conPath }/img/전체보기.jpg" /></a></li>
 						<li><a href="#"><img src="${conPath }/img/프리미엄.jpg" /></a></li>
-						<li><a href="#"><img src="${conPath }/img/견종별 모아보기.jpg" /></a></li>
+						<li><a href="${conPath }/DogBreedView.do"><img src="${conPath }/img/견종별 모아보기.jpg" /></a></li>
 						<li><a href="#"><img src="${conPath }/img/지점별 모아보기.jpg" /></a></li>
 						<li class="text">전체 보기</li>
 						<li class="text">프리 미엄</li>
@@ -160,7 +161,7 @@
 					<ol class="subMenu">
 						<li><a href="${conPath }/CatAllView.do"><img src="${conPath }/img/고양이전체보기.jpg" /></a></li>
 						<li><a href="#"><img src="${conPath }/img/고양이프리미엄.jpg" /></a></li>
-						<li><a href="#"><img src="${conPath }/img/묘종별모아보기.jpg" /></a></li>
+						<li><a href="${conPath }/CatBreedView.do"><img src="${conPath }/img/묘종별모아보기.jpg" /></a></li>
 						<li><a href="#"><img src="${conPath }/img/지점별 모아보기.jpg" /></a></li>
 						<li class="text">전체 보기</li>
 						<li class="text">프리 미엄</li>
@@ -211,7 +212,7 @@
 				</ul>
 			</div>
 			<div id="logo">
-				<a href="${conPath }/main.do">로고</a>
+				<a href="${conPath }/main.do"><img src="${conPath }/img/logo2.PNG" alt="logo" width="570" height="160"></a>
 			</div>
 		</div>
 		<div id="lnb">
@@ -232,7 +233,7 @@
 					<ol class="subMenu">
 						<li><a href="${conPath }/DogAllView.do"><img src="${conPath }/img/전체보기.jpg" /></a></li>
 						<li><a href="#"><img src="${conPath }/img/프리미엄.jpg" /></a></li>
-						<li><a href="#"><img src="${conPath }/img/견종별 모아보기.jpg" /></a></li>
+						<li><a href="${conPath }/DogBreedView.do"><img src="${conPath }/img/견종별 모아보기.jpg" /></a></li>
 						<li><a href="#"><img src="${conPath }/img/지점별 모아보기.jpg" /></a></li>
 						<li class="text">전체 보기</li>
 						<li class="text">프리 미엄</li>
@@ -244,7 +245,7 @@
 					<ol class="subMenu">
 						<li><a href="${conPath }/CatAllView.do"><img src="${conPath }/img/고양이전체보기.jpg" /></a></li>
 						<li><a href="#"><img src="${conPath }/img/고양이프리미엄.jpg" /></a></li>
-						<li><a href="#"><img src="${conPath }/img/묘종별모아보기.jpg" /></a></li>
+						<li><a href="${conPath }/CatBreedView.do"><img src="${conPath }/img/묘종별모아보기.jpg" /></a></li>
 						<li><a href="#"><img src="${conPath }/img/지점별 모아보기.jpg" /></a></li>
 						<li class="text">전체 보기</li>
 						<li class="text">프리 미엄</li>

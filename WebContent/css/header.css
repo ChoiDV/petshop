@@ -51,11 +51,14 @@ header #gnb #left_gnb ul li input[name="search"] {
 
 header #logo {
 	text-align: center;
-	width: 300px;
 	height: 150px;
 	margin: 0 auto;
 	line-height: 150px;
 	cursor: pointer;
+}
+
+header #logo>a>img{
+	margin-left: 85px;
 }
 
 header #lnb {

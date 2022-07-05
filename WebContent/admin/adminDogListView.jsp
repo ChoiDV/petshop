@@ -10,7 +10,23 @@
   <title>Insert title here</title>
   <link href="${conPath }/css/list.css" rel="stylesheet">
  <style>
- 
+ 	.button {
+ 		text-align: center;
+ 		background-color:#ffd1dc;	
+ 		height:30px;
+ 		line-height:30px;
+ 		
+ 	}
+ 	.button button {
+ 		background-color:#ffd1dc;	
+ 		border:2px solid white;
+ 		color:white;
+ 		font-weight:bold;
+ 		 box-shadow: 0 8px 20px 0 rgba(0,0,0,0.15);
+ 		 width:50px;
+ 		
+ 	}
+ 	
  </style>
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <script>
@@ -23,6 +39,7 @@
   <c:if test="${DogInsertResult eq 1 }">
   		<script>
   			alert('강아지 등록 성공 ');
+  			location.href="${conPath }/adminPageDogListView.do";
   		</script>
   	</c:if>
   	<c:if test="${DogInsertResult eq 0 }">
@@ -54,7 +71,6 @@
   		</script>
   	</c:if>
 	<jsp:include page="../main/header.jsp" />
-	<jsp:include page="../admin/adminPageMenu.jsp" />
 		<table id="List">
 			<c:if test="${dogList.size() eq 0 }">
 				<tr>
@@ -71,12 +87,12 @@
 								<div class="name">${dog.dname }</div>
 								<div class="breed">${dog.dbreedname }</div>
 							</a> 
-<%-- 							<c:if test="${ admin.aid eq 'admin' or (admin.aid eq dog.aid ) }  " > --%>
-								<div>
+ 							<c:if test="${( admin.aid eq 'admin') or (admin.aid eq dog.aid ) }" > 
+								<div class="button">
 									<button onclick="location='${conPath }/DogModifyView.do?dnum=${dog.dnum }&pageNum=${pageNum }'">수정</button>
 									<button onclick="location='${conPath }/DogDeleteView.do?dnum=${dog.dnum }'">삭제</button>
 								</div>
-<%-- 							</c:if> --%>
+ 							</c:if> 
 						</td>
 						<c:if test="${i%4 == 3 and i!=11}">
 							</tr><tr>

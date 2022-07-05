@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
   <title>Insert title here</title>
-  <link href="${conPath }/css/style.css" rel="stylesheet">
+  <link href="${conPath }/css/freeboardwrite.css" rel="stylesheet">
  <style>
  
  </style>
@@ -36,7 +36,7 @@
   	<c:if test="${empty reply }">
 	<div class="form">
 		<form action="${conPath }/freeBoardWrite.do" method="post" enctype="multipart/form-data">
-			<table>
+			<table class="input_form">
 				<caption>Express</caption>
 				<tr>
 					<td>
@@ -69,7 +69,7 @@
 		<div class="form">
 		<form action="${conPath }/freeBoardReply.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="fnum" value="${reply.fnum }">
-			<table>
+			<table class="input_form">
 				<caption>${reply.ftitle } 의 Express</caption>
 				<tr>
 					<td>

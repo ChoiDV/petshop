@@ -12,7 +12,7 @@
  <style>
         #joinMessage {
             width:1600px;
-            margin: 0 auto;
+            margin: 130px auto;
         }
         #joinMessage table {
              margin:50px;

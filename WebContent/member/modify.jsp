@@ -10,7 +10,9 @@
   <title>Insert title here</title>
   <link href="${conPath }/css/modify.css" rel="stylesheet">
  <style>
-   
+   	.AllForm {
+   		height:700px;
+   	}
  </style>
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <script>
@@ -28,8 +30,9 @@
 </head>
   <body>
 	<jsp:include page="../main/header.jsp" />
+	<div class="AllForm">
+	<jsp:include page="../main/MyPageMenu.jsp"/>	
 	<div id="form">
-		<jsp:include page="../main/MyPageMenu.jsp"/>	
 		<form action="${conPath }/modifyAllView.do" method="post">
 			<input type="hidden" id="chk" name="chK" value="${param.modify }">
 			<table id="input_form">
@@ -42,13 +45,13 @@
 			 </tr>
 			 <tr>
 			 	<td colspan="2">
-			 		<input type="submit" value="확인">
+			 		<input type="submit" value="확인" class="btn">
 			 	</td>
 			 </tr>
 			</table>
 		</form>
+	</div>	
 	</div>
-	
 	<jsp:include page="../main/footer.jsp" />
   </body>
 </html>

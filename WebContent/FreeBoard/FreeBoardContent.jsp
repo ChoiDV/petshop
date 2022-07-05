@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
   <title>Insert title here</title>
-  <link href="${conPath }/css/style.css" rel="stylesheet">
+  <link href="${conPath }/css/freeboardContent.css" rel="stylesheet">
  <style>
  
  </style>
@@ -38,6 +38,7 @@
   			history.back();
   		</script>
   	</c:if>
+  	<div id="wrap">
   	<div id="top_bar">
 		<span>글번호 : ${freeContent.fnum }</span><span>작성일 : ${freeContent.frdate }</span><span>조회수 : ${freeContent.fhit }</span>
 	</div>
@@ -93,6 +94,7 @@
 			</td>
 		</tr>
 	</table>
+	</div>
 	<jsp:include page="../main/footer.jsp"/>
   </body>
 </html>

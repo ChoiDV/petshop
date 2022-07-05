@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+#wrap {
+	width: 1600px;
+	margin: 150px auto;
+}
+
+#wrap #top_bar {
+	width: 1200px;
+	margin: 20px auto;
+	font-size: 1.2em;
+}
+
+#wrap #top_bar span {
+	display: inline-block;
+	border-right: 3px solid white;
+	text-align: center;
+	background-color: #ffd1dc;
+	height: 60px;
+	line-height: 60px;
+}
+
+#wrap #top_bar span:first-child {
+	width: 295px;
+}
+
+#wrap #top_bar span:nth-child(2) {
+	width: 595px;
+}
+
+#wrap #top_bar span:nth-child(3) {
+	width: 295px;
+}
+
+/*************/
+#wrap #file_bar {
+	width: 400px;
+	height: 120px;
+	float: right;
+}
+
+#wrap #files_menu {
+	
+}
+
+#wrap caption {
+	text-align: center;
+	font-size: 3em;
+	height: 100px;
+	padding: 30px;
+	background-color: #ffd1dc;
+	border-radius: 25px 25px 0 0;
+	font-weight: bold;
+	text-shadow: +5px 0 white;
+}
+
+#wrap table {
+	width: 1200px;
+	margin: 0 auto;
+	background-color: #ffd1dc;
+	clear: both;
+}
+
+#wrap table th {
+	border: 3px solid white;
+	width: 300px;
+	height: 70px;
+}
+
+#wrap table th:last-child {
+	
+}
+
+#wrap table tr:nth-child(3) {
+	border: 1px solid blue;
+	height: 300px;
+}
+
+#wrap table td {
+	width: 900px;
+	padding-left: 30px;
+	background-color: white;
+}
+
+#wrap table {
+	font-size: 1.3em;
+}
+
+#wrap table tr:nth-child(4) {
+	height: 80px;
+	text-align: center;
+}
+
+#wrap table td button {
+	width: 100px;
+	height: 60px;
+	font-size: 0.9em;
+	border: 1px solid white;
+	background-color: #ffd1dc;
+}

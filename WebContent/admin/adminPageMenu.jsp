@@ -8,7 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${conPath }/css/style.css" rel="stylesheet">
 <style>
 	    *{
             list-style:none;
@@ -65,7 +64,7 @@
 				<ul class="submenu">
 					<li><a href="#">회원 추방</a></li>
 					<li><a href="${conPath }/adminJoinView.do">관리자 등록</a>
-					<li><a href="#">관리자 추방</a></li>
+					<li><a href="${conPath }/adminDeleteView.do">관리자 추방</a></li>
 				</ul></li>
 			</c:if>	
 		</ul>

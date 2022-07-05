@@ -1,18 +1,34 @@
 @charset "UTF-8";
+
 * {
 	margin: 0;
 	padding: 0;
 }
 
-#dogList {
+.dogList {
 	width: 1560px;
 	margin: 150px auto;
+}
+
+.dogList caption {
+	font-size: 3em;
+	background-color: #ffd1dc;
+	height:100px;
+	line-height:100px;
+	box-sizing: border-box;
+	text-shadow: +5px 0 white;
+	font-weight:bold;	
 }
 
 .mainimage {
 	width: 450px;
 	height: 200px;
-	margin: 0 20px;
+}
+
+.dogList td {
+	border: 5px solid #ffd1dc;
+	text-align: center;
+	height:300px;
 }
 
 .dogname {
@@ -36,6 +52,7 @@
 #emptyDog {
 	text-align: center;
 }
+
 #insertDog {
 	text-align: center;
 }

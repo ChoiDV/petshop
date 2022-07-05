@@ -36,7 +36,7 @@ CREATE TABLE DOG(
    DR_CHECK NUMBER(1) DEFAULT 1 NOT NULL,  -- 강아지 분양 예약 여부 0은 예약중.
    DRDATE DATE DEFAULT SYSDATE NOT NULL  -- 강아지 글 등록 시점
 );
-
+SELECT DBREEDNO, DBREEDNAME FROM DBREED;
 -- 1. 강아지 분양 글 등록
 INSERT INTO DOG (DNUM, DNAME, DGENDER, DBIRTH, DPRICE, DBREEDNO, AID, DCONTENT, DIMAGE1, DIMAGE2,DIMAGE3,DIMAGE4,DIMAGE5, DIP)
     VALUES(DOG_SEQ.NEXTVAL, '동주니', 'F', '2020-06-24', 1500000, 50 , 'happydog', '예쁘고 귀여운 밤비에요', 'bambi.jpg', 'bambi.jpg', 'bambi.jpg', 'bambi.jpg', 'bambi.jpg', '192.168.10.30' );
@@ -119,11 +119,13 @@ commit;
 -- 더미데이터
 
 
+SELECT * FROM DOG D, DBREED DB
+    WHERE D.DBREEDNO = DB.DBREEDNO
+        AND DB.DBREEDNO=10;
 
 
 
-
-
+commit;
 
 
 

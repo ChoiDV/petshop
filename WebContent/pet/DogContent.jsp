@@ -90,7 +90,7 @@
    
   
   <jsp:include page="../main/header.jsp" />
-  <div id="AllForm">
+  <div id="dogContent_Form">
 	<table id="bar">
 		<tr>
 			<td>
@@ -108,8 +108,7 @@
         <div id="profile"> 프로필</div>
         <div id="profile_eng"> All PET PROFILE </div>
         <div class="dogimage">  <img src="${conPath }/DogImageUpFolder/${dogContent.dimage1 }" alt="dimage1" /></div>
-        <div class="dogimage">  <img src="${conPath }/DogImageUpFolder/${dogContent.dimage2 }" alt="dimage2" /></div>
-        <div class="dogimage">  <img src="${conPath }/DogImageUpFolder/${dogContent.dimage3 }" alt="dimage3" /></div>
+        
         <div id="CuteDog"> Cute Dog </div>
         <div>
 			<c:if test="${ZimCount eq 0 }">
@@ -177,15 +176,25 @@
 	        	</td>
 	        </tr>
         </table>
-        <div id="precontent">
-        	<pre>${dogContent.dcontent }</pre>
-        
-        <div class="dogimage"><img src="${conPath }/DogImageUpFolder/${dogContent.dimage4 }" alt="dimage4" /></div>
-        <div class="dogimage"><img src="${conPath }/DogImageUpFolder/${dogContent.dimage5 }" alt="dimage5" /></div>
+        <div id="dcontent">
+        	<pre>${dogContent.dcontent }</pre>      
     	</div>
+    	<c:if test="${dogContent.dimage2 != null }">
+        	<div class="dogimage"><img src="${conPath }/DogImageUpFolder/${dogContent.dimage2 }" alt="dimage2" /></div>
+        </c:if>
+         <c:if test="${dogContent.dimage3 != null }">
+        	<div class="dogimage"><img src="${conPath }/DogImageUpFolder/${dogContent.dimage3 }" alt="dimage3" /></div>
+        </c:if>
+        <c:if test="${dogContent.dimage4 != null }">
+        	<div class="dogimage"><img src="${conPath }/DogImageUpFolder/${dogContent.dimage4 }" alt="dimage4" /></div>
+        </c:if>
+        <c:if test="${dogContent.dimage5 != null }">
+        	<div class="dogimage"><img src="${conPath }/DogImageUpFolder/${dogContent.dimage5 }" alt="dimage5" /></div>
+        </c:if>
+        
     </div>  <!--  id=dogContent_Form -->
     </div>  <!--  all form -->
-     <div id="reply"> 
+     <div class="reply"> 
         <c:if test="${empty admin }"> 
     	<form action="${conPath }/dogReplyInsert.do" method="post" > 
     		<input type="hidden" name="dnum" value="${dogContent.dnum }">
@@ -201,21 +210,21 @@
     	</table>
     	</form>
     	</c:if>
-    	<table>
+    	<table class="reply_content">
 			<c:if test="${replyList.size() eq 0 }">
 				<tr><td>등록된 댓글이 없습니다.</td></tr>
 			</c:if>
 			<c:if test="${replyList.size() != 0 }">
 				<c:forEach var="reply" items="${replyList }"> 
 					<tr>
-						<td>${reply.rn } : </td>
+						<td>${reply.rn }번 </td>
 						<td>작성자 id : ${reply.mid } </td>
 						<td>${reply.reply_content }</td>
 						<td><fmt:formatDate value="${reply.rdate }" type="date" pattern="YY.MM.dd HH:mm"/></td>
 						<c:if test="${( member.mid eq reply.mid ) or not empty admin }">
 							<td>
-							<button onclick="location='${conPath }/modifyDogReplyView.do?rno=${reply.rno }&dnum=${dogContent.dnum }&replyPageNum=${replyPageNum }'">수정</button>
-							<button onclick="location='${conPath }/deleteDogReplyView.do?rno=${reply.rno }&dnum=${dogContent.dnum }'">삭제</button>
+							<button class="rbtn" onclick="location='${conPath }/modifyDogReplyView.do?rno=${reply.rno }&dnum=${dogContent.dnum }&replyPageNum=${replyPageNum }'">수정</button>
+							<button class="rbtn" onclick="location='${conPath }/deleteDogReplyView.do?rno=${reply.rno }&dnum=${dogContent.dnum }'">삭제</button>
 						</td> 
 						</c:if> 
 					</tr>

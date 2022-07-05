@@ -38,7 +38,7 @@
   		</script>
   	</c:if>
   	<jsp:include page="../main/header.jsp"/>
-	<table id="dogList">
+	<table class="dogList">
 		<caption>Popular Cute Dog</caption>
 			<c:if test="${mainDogList.size() eq 0 }">
 				<tr>
@@ -64,7 +64,7 @@
 				</tr>			
 			</c:if>
 		</table>		
-		<table id="dogList">
+		<table class="dogList">
 			<caption>Popular Pretty Cat</caption>
 			<c:if test="${mainCatList.size() eq 0 }">
 				<tr>

@@ -8,6 +8,8 @@
 #content_form #login_form {
     width:700px;
     margin: 200px auto;
+    box-shadow:0 8px 20px 0 rgba(0,0,0,0.15);
+    
 }
 #content_form table {	
 	width: 700px;
@@ -45,7 +47,6 @@
 #content_form .idpwsearch {
 	font-size: 0.8em;
 	margin-left: 160px;
-    color:;
 }
 
 #content_form caption a{

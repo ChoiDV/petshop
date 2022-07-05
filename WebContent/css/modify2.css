@@ -1,0 +1,45 @@
+@charset "UTF-8";
+ #form {
+            width: 550px;
+            height: 450px;
+            float: left;
+            margin: 150px 0 20px 150px;
+            box-shadow: 0 8px 20px 0 rgba(0,0,0,0.15);
+        }
+            #form caption {
+                width:500px;
+                font-size: 2em;
+                font-weight: bold;
+                padding-top:10px;
+                padding-bottom:10px;
+            }
+
+            #form #input_form th {
+
+
+            }
+            #form #input_form th {
+                width: 190px;
+                height: 50px;
+
+            }
+            #form #input_form td {
+                width: 300px;
+                height: 50px;
+                text-align: center;
+            }
+
+            #form #input_form input:not(.btn) {
+                width: 300px;
+                height: 40px;
+                font-size: 1.5em;
+                text-indent: 10px;
+            }
+
+            #form #input_form .btn {
+                width: 100px;
+                height: 40px;
+                font-weight: bold;
+                margin-top:20px;
+                
+            }

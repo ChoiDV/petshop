@@ -24,7 +24,6 @@
 </head>
   <body>
   	<jsp:include page="../main/header.jsp"/>
-  	<jsp:include page="../admin/adminPageMenu.jsp"/>
 	<div id="form">
         <form action="${conPath }/CatInsert.do" method="post" enctype="multipart/form-data">
             <table id="input_form">
@@ -89,7 +88,7 @@
                 <tr>
                     <td colspan="2" id="submit">
                         <input type="submit" value="등록" class="btn">
-                        <input type="button" value="뒤로가기" class="btn" onclick="location='history.back()'">
+                        <input type="button" value="뒤로가기" class="btn" onclick="location='${conPath }/adminPageView.do'">
                     </td>
                 </tr>
             </table>

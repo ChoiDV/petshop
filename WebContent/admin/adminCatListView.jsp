@@ -10,7 +10,22 @@
   <title>Insert title here</title>
   <link href="${conPath }/css/list.css" rel="stylesheet">
  <style>
- 
+ .button {
+ 		text-align: center;
+ 		background-color:#ffd1dc;	
+ 		height:30px;
+ 		line-height:30px;
+ 		
+ 	}
+ 	.button button {
+ 		background-color:#ffd1dc;	
+ 		border:2px solid white;
+ 		color:white;
+ 		font-weight:bold;
+ 		 box-shadow: 0 8px 20px 0 rgba(0,0,0,0.15);
+ 		 width:50px;
+ 		
+ 	}
  </style>
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <script>
@@ -54,7 +69,6 @@
   		</script>
   	</c:if>
 	<jsp:include page="../main/header.jsp" />
-	<jsp:include page="../admin/adminPageMenu.jsp" />
 		<table id="List">
 			<c:if test="${catList.size() eq 0 }">
 				<tr>
@@ -68,13 +82,13 @@
 						<td>
 							<a href="${conPath }/CatContentView.do?pageNum=${pageNum }&cnum=${cat.cnum } ">
 								<img src="${conPath }/DogImageUpFolder/${cat.cimage1 }" class="mainimage" alt="대표사진"  >
-								<div class="dogname">${cat.cname }</div>
-								<div class="dogbreed">${cat.cbreedname }</div>
+								<div class="name">${cat.cname }</div>
+								<div class="breed">${cat.cbreedname }</div>
 							</a> 
 <%-- 							<c:if test="${ admin.aid eq 'admin' or (admin.aid eq dog.aid ) }  " > --%>
-								<div>
-									<button onclick="location='${conPath }/CatModifyView.do?cnum=${cat.cnum }&pageNum=${pageNum }'">수정</button>
-									<button onclick="location='${conPath }/CatDeleteView.do?cnum=${cat.cnum }'">삭제</button>
+								<div class="button">
+									<button onclick="location='${conPath }/CatModifyView.do?cnum=${cat.cnum }&pageNum=${pageNum }'" class="btn">수정</button>
+									<button onclick="location='${conPath }/CatDeleteView.do?cnum=${cat.cnum }'" class="btn">삭제</button>
 								</div>
 <%-- 							</c:if> --%>
 						</td>
