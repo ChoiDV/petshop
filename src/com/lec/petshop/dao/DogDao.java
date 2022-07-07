@@ -423,7 +423,7 @@ public class DogDao {
 			result = pstmt.executeUpdate();
 			System.out.println(result == SUCCESS ? "강아지 분양글 삭제 성공" : "강아지 분양글 삭제 실패");
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println(e.getMessage() + " : 삭제 에러");
 		} finally {
 			try {
 				if (pstmt != null) {

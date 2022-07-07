@@ -39,6 +39,8 @@ INSERT INTO DBREED ( DBREEDNO, DBREEDNAME)
     VALUES(190,'FrenchBulldog');  -- 프렌치 불도그
 INSERT INTO DBREED ( DBREEDNO, DBREEDNAME)
     VALUES(200,'Dobermann');     -- 도베르만 
+INSERT INTO DBREED ( DBREEDNO, DBREEDNAME )
+    VALUES(210, 'ChowChow');
     
 
     

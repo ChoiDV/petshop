@@ -488,6 +488,99 @@ public class MemberDao {
 		return result;
 	}
 	
+	// 이름과 생년월일로 아이디 조회하기
+	public ArrayList<MemberDto> searchId(String mname, String mbirth) {
+		ArrayList<MemberDto> dtos = new ArrayList<MemberDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM MEMBER" + 
+				"    WHERE MNAME= ? " + 
+				"        AND MBIRTH = TO_DATE( ? ,'RR-MM-DD')" + 
+				"            AND MWITHD =1";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mname);
+			pstmt.setString(2, mbirth);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				String mid = rs.getString("mid");
+				String mpw = rs.getString("mpw");
+				String mtel = rs.getString("mtel");
+				String memail = rs.getString("memail");
+				String maddress = rs.getString("maddress");
+				String mgender = rs.getString("mgender");
+				Date mrdate = rs.getDate("mrdate");
+				int mwithd = rs.getInt("mwithd");
+				dtos.add(new MemberDto(mid, mpw, mname, mtel, mbirth, memail, maddress, mgender, mrdate, mwithd));
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage() + dtos );
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return dtos;
+	}
+	// 비밀번호 찾기
+	public MemberDto searchPw(String mid, String mname, String mbirth) {
+		MemberDto dto = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM MEMBER" + 
+				"    WHERE MID= ? " + 
+				"        AND MNAME= ? " + 
+				"            AND MBIRTH = TO_DATE( ? ,'RR-MM-DD')"
+				+ "				AND MWITHD=1 ";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.setString(2, mname);
+			pstmt.setString(3, mbirth);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				String mpw = rs.getString("mpw");
+				String mtel = rs.getString("mtel");
+				String memail = rs.getString("memail");
+				String maddress = rs.getString("maddress");
+				String mgender = rs.getString("mgender");
+				Date mrdate = rs.getDate("mrdate");
+				int mwithd = rs.getInt("mwithd");
+				dto = new MemberDto(mid, mpw, mname, mtel, mbirth, memail, maddress, mgender, mrdate, mwithd);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage() + dto);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return dto;
+	}
 	
 	
 

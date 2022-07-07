@@ -10,7 +10,11 @@
   <title>Insert title here</title>
   <link href="${conPath }/css/list.css" rel="stylesheet">
  <style>
- 
+ 	.hot {
+ 		width:20px;
+ 		height:20px;
+ 	}
+ 	
  </style>
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <script>
@@ -36,7 +40,11 @@
 						<td>
 							<a href="${conPath }/DogContentView.do?pageNum=${pageNum }&dnum=${dog.dnum }">
 								<img src="${conPath }/DogImageUpFolder/${dog.dimage1 }" class="mainimage" alt="대표사진"  >
-								<div class="name">${dog.dname }</div>
+								<div class="name">${dog.dname }
+									<c:if test="${dog.dhit > 20 }">
+										<img src="${conPath }/img/pawprints.png" class="hot">
+									</c:if>
+								</div>
 								<div class="breed">${dog.dbreedname }</div>
 							</a>
 						</td>						

@@ -151,4 +151,27 @@ public class CatZimDao {
 		}
 		return zims;
 	}
+	// 고양이 삭제를 위한 찜 취소 
+	public int deleteAllZim(int cnum) {
+		int result = ZIM_UNCHECK;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM CZIM CNUM=?";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cnum);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn  != null) conn.close();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return result;
+	}
 }

@@ -8,21 +8,17 @@
 <head>
 <meta charset="UTF-8">
   <title>Insert title here</title>
-  <link href="${conPath }/css/FreeBoard.css" rel="stylesheet">
+  <link href="${conPath }/css/Review.css" rel="stylesheet">
  <style>
- 	.left{text-align: left;}
- 	.hot {
-		width:20px;
-		height:20px; 	
- 	}
+ 
  </style>
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
- <script>
+  <script>
  	$(document).ready(function(){
  		$('tr').click(function(){
- 			var fnum = $(this).children().eq(0).text();
- 			if ( !isNaN(Number(fnum))){
- 				location.href='${conPath }/freeBoardContentView.do?fnum='+fnum+'&pageNum=${pageNum }';
+ 			var rnum = $(this).children().eq(0).text();
+ 			if ( !isNaN(Number(rnum))){
+ 				location.href='${conPath }/ReviewContentView.do?rnum='+rnum+'&pageNum=${pageNum }';
  			}
  		});
  	});
@@ -64,8 +60,8 @@
   </c:if>
   <jsp:include page="../main/header.jsp"/>
   <div id="allform">	
-			<div>Communication</div>
-			<div class="write_board"><a href="${conPath }/freeBoardWriteView.do">글 쓰기</a></div>
+			<div>Review</div>
+			<div class="write_board"><a href="${conPath }/ReviewWriteView.do">글 쓰기</a></div>
 		<table>
 			<tr>
 				<th>글 번호</th>
@@ -74,54 +70,54 @@
 				<th>작성일</th>
 				<th>조회수</th>
 			</tr>
-			<c:if test="${freeList.size() eq 0 }">
+			<c:if test="${reviewList.size() eq 0 }">
 				<tr>
 					<td>
 						작성된 글이 없습니다.
 					</td>
 				</tr>
 			</c:if>
-			<c:if test="${freeList.size() != 0 }">
-				<c:forEach var="list" items="${freeList }">
+			<c:if test="${reviewList.size() != 0 }">
+				<c:forEach var="list" items="${reviewList }">
 					<tr>
-						<td>${list.fnum }</td>
+						<td>${list.rnum }</td>
 						<td>${list.mname }</td>
 						<td class="left">
-							<c:forEach var="i" begin="1" end="${list.findent }">
-								<c:if test="${i eq list.findent }">
+							<c:forEach var="i" begin="1" end="${list.rindent }">
+								<c:if test="${i eq list.rindent }">
 									└─
 								</c:if>
-								<c:if test="${i != list.findent }">
+								<c:if test="${i != list.rindent }">
 									&nbsp; &nbsp; &nbsp;
 								</c:if>
 							</c:forEach>
-							${list.ftitle }
-							<c:if test="${list.fhit > 20 }">
+								${list.rtitle }
+							<c:if test="${list.rhit > 20 }">
 								<img src="${conPath }/img/hot.png" class="hot">
 							</c:if>
 						</td>
-						<td><fmt:formatDate value="${list.frdate }" pattern="yy년MM월dd일(E)" /></td>
-						<td>${list.fhit }</td>
+						<td><fmt:formatDate value="${list.rrdate }" pattern="yy년MM월dd일(E)" /></td>
+						<td>${list.rhit }</td>
 					</tr>
 				</c:forEach>
 			</c:if>
 		</table>
 		<div class="paging">
 			<c:if test="${startPage > BLOCKSIZE}">
-		 		 <a href="${conPath }/freeBoardListView.do?pageNum=1">&lt;&lt;</a> 
-		 		 <a href="${conPath }/freeBoardListView.do?pageNum=${startPage-1 }">&lt;</a> 
+		 		 <a href="${conPath }/ReviewListView.do?pageNum=1">&lt;&lt;</a> 
+		 		 <a href="${conPath }/ReviewListView.do?pageNum=${startPage-1 }">&lt;</a> 
 		 	</c:if>
 		 	<c:forEach var="i" begin="${startPage }" end="${endPage }">
 		 		<c:if test="${i eq pageNum }">
 		 			[ <b> ${i } </b> ]
 		 		</c:if>
 		 		<c:if test="${i != pageNum }">
-		 			[ <a href="${conPath }/freeBoardListView.do?pageNum=${i }">${i }</a> ]
+		 			[ <a href="${conPath }/ReviewListView.do?pageNum=${i }">${i }</a> ]
 		 		</c:if>
 		 	</c:forEach>
 		 	<c:if test="${endPage < pageCnt }">
-		 		[ <a href="${conPath }/freeBoardListView.do?pageNum=${endPage+1 }">&gt;</a> ]
-		 		[ <a href="${conPath }/freeBoardListView.do?pageNum=${pageCnt}">&gt;&gt;</a> ]
+		 		[ <a href="${conPath }/ReviewListView.do?pageNum=${endPage+1 }">&gt;</a> ]
+		 		[ <a href="${conPath }/ReviewListView.do?pageNum=${pageCnt}">&gt;&gt;</a> ]
 		 	</c:if>
 		</div>
 		</div>

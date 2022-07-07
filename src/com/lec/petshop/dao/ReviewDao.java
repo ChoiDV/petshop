@@ -12,19 +12,19 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.lec.petshop.dto.FreeBoardDto;
+import com.lec.petshop.dto.ReviewDto;
 
-public class FreeBoardDao {
+public class ReviewDao {
 	public static final int SUCCESS = 1;
 	public static final int FAIL = 0;
 
-	private static FreeBoardDao instance = new FreeBoardDao();
+	private static ReviewDao instance = new ReviewDao();
 
-	public static FreeBoardDao getInstance() {
+	public static ReviewDao getInstance() {
 		return instance;
 	}
 
-	private FreeBoardDao() {
+	private ReviewDao() {
 	}
 
 	private Connection getConnection() throws SQLException {
@@ -40,13 +40,13 @@ public class FreeBoardDao {
 	}
 
 	// 글 목록 출력
-	public ArrayList<FreeBoardDto> listBoard(int startRow, int endRow) {
-		ArrayList<FreeBoardDto> dtos = new ArrayList<FreeBoardDto>();
+	public ArrayList<ReviewDto> listReview(int startRow, int endRow) {
+		ArrayList<ReviewDto> dtos = new ArrayList<ReviewDto>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM" + 
-				"    (SELECT ROWNUM RN, A.* FROM (SELECT F.*, MNAME FROM FREEBOARD F, MEMBER M WHERE F.MID= M.MID ORDER BY FGROUP DESC, FSTEP ) A )" + 
+		String sql = "SELECT * FROM " + 
+				"    (SELECT ROWNUM RN, A.* FROM (SELECT R.*, MNAME FROM REVIEW R, MEMBER M WHERE R.MID= M.MID ORDER BY RGROUP DESC, RSTEP ) A )" + 
 				"          WHERE RN BETWEEN ? AND ?";
 		try {
 			conn = getConnection();
@@ -55,25 +55,25 @@ public class FreeBoardDao {
 			pstmt.setInt(2, endRow);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				int fnum = rs.getInt("fnum");
+				int rnum = rs.getInt("rnum");
 				String mid = rs.getString("mid");
-				String ftitle = rs.getString("ftitle");
-				String fcontent = rs.getString("fcontent");
-				Date frdate = rs.getDate("frdate");
-				int fhit = rs.getInt("fhit");
-				int fgroup = rs.getInt("fgroup");
-				int fstep = rs.getInt("fstep");
-				int findent = rs.getInt("findent");
-				String fip = rs.getString("fip");
-				String ffilename1 = rs.getString("ffilename1");
-				String ffilename2 = rs.getString("ffilename2");
-				String ffilename3 = rs.getString("ffilename3");
+				String aid = rs.getString("aid");
+				String rtitle = rs.getString("rtitle");
+				String rcontent = rs.getString("rcontent");
+				Date rrdate = rs.getDate("rrdate");
+				int rhit = rs.getInt("rhit");
+				int rgroup = rs.getInt("rgroup");
+				int rstep = rs.getInt("rstep");
+				int rindent = rs.getInt("rindent");
+				String rip = rs.getString("rip");
+				String rfilename1 = rs.getString("rfilename1");
+				String rfilename2 = rs.getString("rfilename2");
+				String rfilename3 = rs.getString("rfilename3");
 				String mname = rs.getString("mname");
-				dtos.add(new FreeBoardDto(fnum, mid, ftitle, fcontent, frdate, fhit, fgroup, fstep, findent, fip,
-						ffilename1, ffilename2, ffilename3, mname));
+				dtos.add(new ReviewDto(rnum, mid, aid, rtitle, rcontent, rrdate, rhit, rgroup, rstep, rindent, rip, rfilename1, rfilename2, rfilename3, mname));
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
+			System.out.println(e.getMessage()+"목록 출력 실패");
 		} finally {
 			try {
 				if (rs != null) {
@@ -93,12 +93,12 @@ public class FreeBoardDao {
 	}
 
 	// 글 전체 개수 가져오기
-	public int getBoardTotalCnt() {
+	public int getReviewTotalCnt() {
 		int totalCnt = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT COUNT(*) FROM FREEBOARD";
+		String sql = "SELECT COUNT(*) FROM REVIEW";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -126,24 +126,23 @@ public class FreeBoardDao {
 	}
 
 	// 원글 쓰기
-	public int writeFreeBoard(String mid, String ftitle, String fcontent, String fip, String ffilename1,
-			String ffilename2, String ffilename3) {
+	public int writeReview(String mid, String aid,String rtitle, String rcontent, String rip, String rfilename1, String rfilename2, String rfilename3) {
 		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO FREEBOARD( FNUM, MID, FTITLE, FCONTENT, FGROUP, FSTEP, FINDENT, FIP, FFILENAME1, FFILENAME2, FFILENAME3 )"
-				+ "    VALUES ( FREE_SEQ.NEXTVAL, ? , ? , " + "                            ? , FREE_SEQ.CURRVAL, 0, 0,"
-				+ "                                    ?, ? , ? , ? )";
+		String sql = "INSERT INTO REVIEW (RNUM, MID, AID, RTITLE, RCONTENT, RGROUP, RSTEP, RINDENT, RIP, RFILENAME1, RFILENAME2, RFILENAME3 )" + 
+				"    VALUES (REVIEW_SEQ.NEXTVAL, ?,?, ?, ?, REVIEW_SEQ.CURRVAL, 0, 0, ?, ?,?, ? )";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mid);
-			pstmt.setString(2, ftitle);
-			pstmt.setString(3, fcontent);
-			pstmt.setString(4, fip);
-			pstmt.setString(5, ffilename1);
-			pstmt.setString(6, ffilename2);
-			pstmt.setString(7, ffilename3);
+			pstmt.setString(2, aid);
+			pstmt.setString(3, rtitle);
+			pstmt.setString(4, rcontent);
+			pstmt.setString(5, rip);
+			pstmt.setString(6, rfilename1);
+			pstmt.setString(7, rfilename2);
+			pstmt.setString(8, rfilename3);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -163,14 +162,15 @@ public class FreeBoardDao {
 	}
 
 	// 4.조회수 올리기
-	public void hitUp(int fnum) {
+	public void hitUp(int rnum) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "UPDATE FREEBOARD SET FHIT = FHIT + 1" + "    WHERE FNUM = ?";
+		String sql = "UPDATE REVIEW SET RHIT = RHIT + 1" + 
+				"    WHERE RNUM = ?";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, fnum);
+			pstmt.setInt(1, rnum);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -189,34 +189,34 @@ public class FreeBoardDao {
 	}
 
 	// 글 상세보기
-	public FreeBoardDto contentView(int fnum) {
-		FreeBoardDto dto = null;
-		hitUp(fnum);
+	public ReviewDto contentReview(int rnum) {
+		ReviewDto dto = null;
+		hitUp(rnum);
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT FB.*, MNAME FROM FREEBOARD FB, MEMBER M WHERE FB.MID = M.MID AND  FNUM =?";
+		String sql = "SELECT R.*, MNAME FROM REVIEW R, MEMBER M WHERE R.MID = M.MID AND  RNUM =?";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, fnum);
+			pstmt.setInt(1, rnum);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				String mid = rs.getString("mid");
-				String ftitle = rs.getString("ftitle");
-				String fcontent = rs.getString("fcontent");
-				Date frdate = rs.getDate("frdate");
-				int fhit = rs.getInt("fhit");
-				int fgroup = rs.getInt("fgroup");
-				int fstep = rs.getInt("fstep");
-				int findent = rs.getInt("findent");
-				String fip = rs.getString("fip");
-				String ffilename1 = rs.getString("ffilename1");
-				String ffilename2 = rs.getString("ffilename2");
-				String ffilename3 = rs.getString("ffilename3");
+				String aid = rs.getString("aid");
+				String rtitle = rs.getString("rtitle");
+				String rcontent = rs.getString("rcontent");
+				Date rrdate = rs.getDate("rrdate");
+				int rhit = rs.getInt("rhit");
+				int rgroup = rs.getInt("rgroup");
+				int rstep = rs.getInt("rstep");
+				int rindent = rs.getInt("rindent");
+				String rip = rs.getString("rip");
+				String rfilename1 = rs.getString("rfilename1");
+				String rfilename2 = rs.getString("rfilename2");
+				String rfilename3 = rs.getString("rfilename3");
 				String mname = rs.getString("mname");
-				dto = new FreeBoardDto(fnum, mid, ftitle, fcontent, frdate, fhit, fgroup, fstep, findent, fip,
-						ffilename1, ffilename2, ffilename3, mname);
+				dto = new ReviewDto(rnum, mid, aid, rtitle, rcontent, rrdate, rhit, rgroup, rstep, rindent, rip, rfilename1, rfilename2, rfilename3, mname);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -238,34 +238,34 @@ public class FreeBoardDao {
 		return dto;
 	}
 
-	// 글 수정할떄 dto 가져오기
-	public FreeBoardDto modifyView_replyView(int fnum) {
-		FreeBoardDto dto = null;
+	// 글 수정할떄 dto 가져오기  (hitup) 없는거 
+	public ReviewDto modifyGetDto(int rnum) {
+		ReviewDto dto = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT FB.*, MNAME FROM FREEBOARD FB, MEMBER M WHERE FB.MID = M.MID AND  FNUM =?";
+		String sql = "SELECT R.*, MNAME FROM REVIEW R, MEMBER M WHERE R.MID = M.MID AND  RNUM =?";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, fnum);
+			pstmt.setInt(1, rnum);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				String mid = rs.getString("mid");
-				String ftitle = rs.getString("ftitle");
-				String fcontent = rs.getString("fcontent");
-				Date frdate = rs.getDate("frdate");
-				int fhit = rs.getInt("fhit");
-				int fgroup = rs.getInt("fgroup");
-				int fstep = rs.getInt("fstep");
-				int findent = rs.getInt("findent");
-				String fip = rs.getString("fip");
-				String ffilename1 = rs.getString("ffilename1");
-				String ffilename2 = rs.getString("ffilename2");
-				String ffilename3 = rs.getString("ffilename3");
+				String aid = rs.getString("aid");
+				String rtitle = rs.getString("rtitle");
+				String rcontent = rs.getString("rcontent");
+				Date rrdate = rs.getDate("rrdate");
+				int rhit = rs.getInt("rhit");
+				int rgroup = rs.getInt("rgroup");
+				int rstep = rs.getInt("rstep");
+				int rindent = rs.getInt("rindent");
+				String rip = rs.getString("rip");
+				String rfilename1 = rs.getString("rfilename1");
+				String rfilename2 = rs.getString("rfilename2");
+				String rfilename3 = rs.getString("rfilename3");
 				String mname = rs.getString("mname");
-				dto = new FreeBoardDto(fnum, mid, ftitle, fcontent, frdate, fhit, fgroup, fstep, findent, fip,
-						ffilename1, ffilename2, ffilename3, mname);
+				dto = new ReviewDto(rnum, mid, aid, rtitle, rcontent, rrdate, rhit, rgroup, rstep, rindent, rip, rfilename1, rfilename2, rfilename3, mname);
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -288,15 +288,16 @@ public class FreeBoardDao {
 	}
 
 	// step A
-	private void stepA(int bgroup, int bstep) {
+	private void stepA(int rgroup, int rstep) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "UPDATE FREEBOARD SET FSTEP = FSTEP +1" + "    WHERE FGROUP=? AND FSTEP > ?";
+		String sql = "UPDATE REVIEW SET RSTEP = RSTEP +1" + 
+				"    WHERE RGROUP=? AND RSTEP > ?";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, bgroup);
-			pstmt.setInt(2, bstep);
+			pstmt.setInt(1, rgroup);
+			pstmt.setInt(2, rstep);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage() + "step A");
@@ -315,31 +316,31 @@ public class FreeBoardDao {
 	}
 
 	// 답변글 쓰기
-	public int reply(String mid, String ftitle, String fcontent, String fip, int fgroup, int fstep, int findent,
-			String ffilename1, String ffilename2, String ffilename3) {
+	public int replyReview(String mid, String rtitle, String rcontent, String rip, int rgroup, int rstep, int rindent,
+			String rfilename1, String rfilename2, String rfilename3) {
 		int result = FAIL;
-		stepA(fgroup, fstep);
+		stepA(rgroup, rstep);
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO FREEBOARD(FNUM, MID, FTITLE, FCONTENT, FGROUP, FSTEP, FINDENT, FIP, FFILENAME1, FFILENAME2, FFILENAME3 )"
-				+ "    VALUES ( FREE_SEQ.NEXTVAL, ? , ? , ? , ? , ? , ? , ?, ?, ?, ? )";
+		String sql = "INSERT INTO REVIEW (RNUM, MID,  RTITLE, RCONTENT, RGROUP, RSTEP, RINDENT, RIP, RFILENAME1, RFILENAME2, RFILENAME3 )" + 
+				"    VALUES (REVIEW_SEQ.NEXTVAL, ?, ?, ?, ? , ?, ?, ? , ?, ?, ? )";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mid);
-			pstmt.setString(2, ftitle);
-			pstmt.setString(3, fcontent);
-			pstmt.setInt(4, fgroup);
-			pstmt.setInt(5, fstep + 1); // 꼭 +1 쓰기
-			pstmt.setInt(6, findent + 1);
-			pstmt.setString(7, fip);
-			pstmt.setString(8, ffilename1);
-			pstmt.setString(9, ffilename2);
-			pstmt.setString(10, ffilename3);
+			pstmt.setString(2, rtitle);
+			pstmt.setString(3, rcontent);
+			pstmt.setInt(4, rgroup);
+			pstmt.setInt(5, rstep + 1); // 꼭 +1 쓰기
+			pstmt.setInt(6, rindent + 1);
+			pstmt.setString(7, rip);
+			pstmt.setString(8, rfilename1);
+			pstmt.setString(9, rfilename2);
+			pstmt.setString(10, rfilename3);
 			result = pstmt.executeUpdate();
 			System.out.println(result == SUCCESS ? "답변글 성공" : "답변글 실패 ");
 		} catch (SQLException e) {
-			System.out.println(e.getMessage() + "reply 답변글 실패");
+			System.out.println(e.getMessage() + "ReviewReply 답변글 실패");
 		} finally {
 			try {
 				if (pstmt != null) {
@@ -356,31 +357,33 @@ public class FreeBoardDao {
 	}
 
 	// 9. 글 수정
-	public int modifyBoard(String ftitle, String fcontent, String fip, String ffilename1, String ffilename2,
-			String ffilename3, int fnum) {
+	public int modifyReview(String rtitle, String rcontent, String rip, String rfilename1, String rfilename2,
+			String rfilename3, int rnum) {
 		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "UPDATE FREEBOARD SET FTITLE = ? ," + "                        FCONTENT = ? ,"
-				+ "                            FIP = ? ," + "                                FFILENAME1 = ?,"
-				+ "                                    FFILENAME2 = ?,"
-				+ "                                        FFILENAME3 = ?,"
-				+ "                                            FRDATE = SYSDATE"
-				+ "                            WHERE FNUM=?";
+		String sql = "UPDATE REVIEW SET RTITLE = ?," + 
+				"                        RCONTENT = ?," + 
+				"                            RIP = ?," + 
+				"                                RFILENAME1 = ? ," + 
+				"                                    RFILENAME2 = ? ," + 
+				"                                        RFILENAME3 = ? ," + 
+				"                                            RRDATE = SYSDATE" + 
+				"                            WHERE RNUM=?";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, ftitle);
-			pstmt.setString(2, fcontent);
-			pstmt.setString(3, fip);
-			pstmt.setString(4, ffilename1);
-			pstmt.setString(5, ffilename2);
-			pstmt.setString(6, ffilename3);
-			pstmt.setInt(7, fnum);
+			pstmt.setString(1, rtitle);
+			pstmt.setString(2, rcontent);
+			pstmt.setString(3, rip);
+			pstmt.setString(4, rfilename1);
+			pstmt.setString(5, rfilename2);
+			pstmt.setString(6, rfilename3);
+			pstmt.setInt(7, rnum);
 			result = pstmt.executeUpdate();
-			System.out.println(result == SUCCESS ? "글 수정 성공" : "글 수정  실패 ");
+			System.out.println(result == SUCCESS ? "후기글 수정 성공" : "글 수정  실패 ");
 		} catch (SQLException e) {
-			System.out.println(e.getMessage() + "글 수정 실패");
+			System.out.println(e.getMessage() + "후기글 수정 실패");
 		} finally {
 			try {
 				if (pstmt != null) {
@@ -397,20 +400,20 @@ public class FreeBoardDao {
 	}
 	
 	// 글삭제 
-	public int delete(int fgroup, int fstep, int findent) {
+	public int deleteReview(int rgroup, int rstep, int rindent) {
 		int result = FAIL;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "DELETE FROM FREEBOARD WHERE FGROUP = ? AND (FSTEP>=? AND " + 
-				"    FSTEP<(SELECT NVL(MIN(FSTEP),9999) FROM FREEBOARD WHERE FGROUP=? AND FSTEP>? AND FINDENT<=?))";
+		String sql = "DELETE FROM REVIEW WHERE RGROUP = ? AND (RSTEP>=? AND" + 
+				"    RSTEP<(SELECT NVL(MIN(RSTEP),9999) FROM REVIEW WHERE RGROUP=? AND RSTEP>? AND RINDENT<=?))";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1,fgroup);
-			pstmt.setInt(2,fstep);
-			pstmt.setInt(3,fgroup);
-			pstmt.setInt(4,fstep);
-			pstmt.setInt(5,findent);		
+			pstmt.setInt(1,rgroup);
+			pstmt.setInt(2,rstep);
+			pstmt.setInt(3,rgroup);
+			pstmt.setInt(4,rstep);
+			pstmt.setInt(5,rindent);		
 			result = pstmt.executeUpdate();
 			System.out.println(result >= SUCCESS ? result+" 개 글 삭제 성공" : "글 삭제  실패 ");
 		} catch (SQLException e) {
@@ -429,7 +432,4 @@ public class FreeBoardDao {
 		}
 		return result;
 	}
-	
-	
-
 }

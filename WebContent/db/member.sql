@@ -83,6 +83,16 @@ UPDATE MEMBER SET MID = 'Aaa'
 UPDATE MEMBER SET MPW = '111'
                 WHERE MID = 'aaa'
                     AND MPW ='123';
-        
+-- 아이디  찾기
+SELECT * FROM MEMBER
+    WHERE MNAME='최진영'
+        AND MBIRTH = TO_DATE('991203','RR-MM-DD')
+            AND MWITHD =1;
+-- 비밀번호 찾기 
+SELECT * FROM MEMBER
+    WHERE MID='wlsdud'
+        AND MNAME='최진영'
+            AND MBIRTH = TO_DATE('991203','RR-MM-DD')
+                AND MWITHD=1;
 commit;
 

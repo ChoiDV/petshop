@@ -150,4 +150,28 @@ public class ZimDao {
 		}
 		return zims;
 	}
+	
+	// 찜 취소 ( 강아지 삭제를 위한 DAO)
+	public int deleteAllZim(int dnum) {
+		int result = ZIM_UNCHECK;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM DZIM WHERE DNUM=?";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dnum);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn  != null) conn.close();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return result;
+	}
 }

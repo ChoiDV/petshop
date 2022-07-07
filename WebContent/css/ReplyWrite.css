@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.form {
+	border: 1px solid white;
+	width: 1200px;
+	margin: 150px auto;
+	border-radius: 30px;
+	background-color: #ffd1dc;
+	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+}
+
+.form caption {
+	width: 1200px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 3em;
+	background-color: #ffd1dc;
+	margin-bottom: 20px;
+}
+
+.form .input_form {
+	width: 1200px;
+	margin: 20px auto;
+	background-color: #ffd1dc;
+}
+
+.form .input_form th {
+	width: 300px;
+	font-size: 1.3em;
+}
+
+.form .input_form td {
+	width: 700px;
+	font-size: 1.3em;
+	text-align: center;
+}
+
+.form .input_form input:not([type="file"]) {
+	margin: 10px;
+	border-radius: 10px;
+	border: none;
+}
+
+.form .input_form input[type="text"], textarea {
+	margin: 10px;
+	font-size: 1.3em;
+	width: 500px;
+	text-indent: 20px;
+}
+
+.form .input_form input[type="submit"], input[type="button"] {
+	background-color: white;
+	color: black;
+	font-size: 1.5em;
+	font-weight: bold;
+}

@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.lec.petshop.dao.ZimDao;
 
-public class insertZimservice implements Service {
+public class insertZimService implements Service {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {

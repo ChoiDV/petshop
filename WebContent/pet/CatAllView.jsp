@@ -36,7 +36,11 @@
 						<td>
 							<a href="${conPath }/CatContentView.do?pageNum=${pageNum }&cnum=${cat.cnum } ">
 								<img src="${conPath }/DogImageUpFolder/${cat.cimage1 }" class="mainimage" alt="대표사진"  >
-								<div class="name">${cat.cname }</div>
+								<div class="name">${cat.cname }
+									<c:if test="${cat.chit > 20 }">
+										<img src="${conPath }/img/pawprints.png" class="hot">
+									</c:if>
+								</div>
 								<div class="breed">${cat.cbreedname }</div>
 							</a>
 						</td>

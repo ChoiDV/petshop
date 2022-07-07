@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.lec.petshop.dao.DogDao;
 import com.lec.petshop.dao.Dog_ReplyDao;
+import com.lec.petshop.dao.ZimDao;
 import com.lec.petshop.dto.Dog_ReplyDto;
 
 public class DogDeleteService implements Service {
@@ -17,6 +18,8 @@ public class DogDeleteService implements Service {
 		int dnum = Integer.parseInt(request.getParameter("dnum"));
 		DogDao dao = DogDao.getInstance();		
 		Dog_ReplyDao rdao = Dog_ReplyDao.getInstance();
+		ZimDao zdao = ZimDao.getInstance();
+		zdao.deleteAllZim(dnum);
 		ArrayList<Dog_ReplyDto> dtos = rdao.replyListDog(dnum);
 		for(Dog_ReplyDto reply : dtos ) {
 			rdao.deleteDReply(reply.getRno());
@@ -28,7 +31,6 @@ public class DogDeleteService implements Service {
 			request.setAttribute("deleteResult", result);
 		}
 		request.setAttribute("pageNum", pageNum);
-
 	}
 
 }

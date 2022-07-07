@@ -19,11 +19,18 @@
  	});
  </script>  
 </head>
-
   <body>
-  	<jsp:forward page="main.do"/>
-	
+	<c:if test="${not empty searchPwResult }">
+		<script>
+			alert('${searchPwResult.mid }님의 비밀번호는 : ${searchPwResult.mpw }');
+			location.href="${conPath }/loginView.do?mid=${searchPwResult.mid }";
+		</script>
+	</c:if>
+	<c:if test="${empty searchPwResult }">
+		<script>
+			alert('정보를 잘못 입력하셨습니다.');
+			history.back();
+		</script>
+	</c:if>
   </body>
 </html>
-
-

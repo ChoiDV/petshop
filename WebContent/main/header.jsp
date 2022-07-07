@@ -42,7 +42,7 @@
 				<ul>
 					<li>
 						<input type="text" name="search" />
-						<button class="searchbutton" onclick="#">
+						<button class="searchbutton">
 							<img src="${conPath }/img/돋보기1.PNG" class="searchimg">
 						</button>
 					</li>
@@ -95,7 +95,7 @@
 						<!-- 입양 후기 게시판 -->
 						<li></li>
 						<li></li>
-						<li><a href="#"><img src="${conPath }/img/실제분양후기.jpg" /></a></li>
+						<li><a href="${conPath }/ReviewListView.do"><img src="${conPath }/img/실제분양후기.jpg" /></a></li>
 						<li><a href="#"><img src="${conPath }/img/실제분양후기.jpg" /></a></li>
 						<li class="text"></li>
 						<li class="text"></li>
@@ -174,7 +174,7 @@
 						<!-- 입양 후기 게시판 -->
 						<li></li>
 						<li></li>
-						<li><a href="#"><img src="${conPath }/img/실제분양후기.jpg" /></a></li>
+						<li><a href="${conPath }/ReviewListView.do"><img src="${conPath }/img/실제분양후기.jpg" /></a></li>
 						<li><a href="#"><img src="${conPath }/img/실제분양후기.jpg" /></a></li>
 						<li class="text"></li>
 						<li class="text"></li>
@@ -258,7 +258,7 @@
 						<!-- 입양 후기 게시판 -->
 						<li></li>
 						<li></li>
-						<li><a href="#"><img src="${conPath }/img/실제분양후기.jpg" /></a></li>
+						<li><a href="${conPath }/ReviewListView.do"><img src="${conPath }/img/실제분양후기.jpg" /></a></li>
 						<li><a href="#"><img src="${conPath }/img/실제분양후기.jpg" /></a></li>
 						<li class="text"></li>
 						<li class="text"></li>
