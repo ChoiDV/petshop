@@ -75,10 +75,10 @@
 	</c:if>
 	<c:if test="${not empty reply }">
 		<div class="form">
-		<form action="${conPath }/ReviewReply.do" method="post" enctype="multipart/form-data">
+		<form action="${conPath }/ReviewReplyWrite.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="rnum" value="${reply.rnum }">
 			<table class="input_form">
-				<caption>${reply.ftitle } 의 Express</caption>
+				<caption>${reply.rtitle } 의 Express</caption>
 				<tr>
 					<td>
 						<input type="text" name="rtitle" placeholder="제목을 입력해 주세요.">
@@ -107,6 +107,5 @@
 	</div>
 	</c:if>
 	<jsp:include page="../main/footer.jsp"/>
-  </body>
   </body>
 </html>

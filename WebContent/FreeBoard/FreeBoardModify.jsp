@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
   <title>Insert title here</title>
-  <link href="${conPath }/css/style.css" rel="stylesheet">
+  <link href="${conPath }/css/freeboardwrite.css" rel="stylesheet">
  <style>
  
  </style>
@@ -21,11 +21,11 @@
 </head>
   <body>
   	<jsp:include page="../main/header.jsp"/>
-  	<div class="main_form">
+  	<div class="form">
   		<form action="${conPath }/freeBoardModify.do" method="post" enctype="multipart/form-data">
   			<input type="hidden" name="pageNum" value="${pageNum }">
   			<input type="hidden" name="fnum" value="${fnum }">
-  			<table>
+  			<table class="input_form">
   				<caption>MODIFY</caption>
   				<tr>
   					<th>작성자 아이디</th>
@@ -55,8 +55,8 @@
   				</tr>	
   				<tr>
   					<td>
-  						<input type="submit" value="수정">
-  						<input type="reset" value="취소" onclick="history.back();">		
+  						<input type="submit" value="수정" class="btn">
+  						<input type="reset" value="취소"  class="btn" onclick="history.back();">		
   					</td>
   				</tr>
   			</table>

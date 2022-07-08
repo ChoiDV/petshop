@@ -55,7 +55,14 @@ import com.lec.petshop.service.MSearchIdService;
 import com.lec.petshop.service.MSearchPwService;
 import com.lec.petshop.service.MSearchPwViewService;
 import com.lec.petshop.service.MainService;
+import com.lec.petshop.service.ReviewContentService;
+import com.lec.petshop.service.ReviewDeleteService;
+import com.lec.petshop.service.ReviewDeleteViewService;
 import com.lec.petshop.service.ReviewListService;
+import com.lec.petshop.service.ReviewModifyService;
+import com.lec.petshop.service.ReviewModifyViewService;
+import com.lec.petshop.service.ReviewReplyWriteService;
+import com.lec.petshop.service.ReviewReplyWriteViewService;
 import com.lec.petshop.service.ReviewWriteService;
 import com.lec.petshop.service.Service;
 import com.lec.petshop.service.deleteCatZimService;
@@ -417,20 +424,46 @@ public class PetController extends HttpServlet {
 		/*************************************************************************************************Communication************************************************************/
 		/*************************************************************************************************Communication************************************************************/
 		/*************************************************************************************************Communication************************************************************/
-		  else if(command.equals("/ReviewListView.do")) {
+		  else if(command.equals("/ReviewListView.do")) {  // 후기 게시판 리스트 출력 단
 			  service = new ReviewListService();
 			  service.execute(request, response); 
 			  viewPage = "Review/ReviewList.jsp";
-		  } else if(command.equals("/ReviewWriteView.do")) {
+		  } else if(command.equals("/ReviewWriteView.do")) {  // 후기 게시판 원글 작성 View단
 			  service = new AdminListService();
 			  service.execute(request, response);
-			  viewPage = "Review/RevivewWrite.jsp";
-		  } else if(command.equals("/ReviewWrite.do")) {
+			  viewPage = "Review/ReviewWrite.jsp";
+		  } else if(command.equals("/ReviewWrite.do")) {   // 후기 게시판 원글 작성 처리단
 			  service = new ReviewWriteService();
 			  service.execute(request, response);
 			  viewPage = "ReviewListView.do";			  
-		  } else if(command.equals("")) {
-			  
+		  } else if(command.equals("/ReviewContentView.do")) { // 후기게시판 상세보기 처리단
+			  service = new ReviewContentService();
+			  service.execute(request, response);
+			  viewPage = "Review/ReviewContent.jsp";
+		  } else if(command.equals("/ReviewReplyWriteView.do")) {  // 후기 게시판 답변글 작성 View단
+			  service = new ReviewReplyWriteViewService();
+			  service.execute(request, response);  
+			  viewPage = "Review/ReviewWrite.jsp";
+		  } else if(command.equals("/ReviewReplyWrite.do")) { // 후기 게시판 답변글 처리 단
+			  service = new ReviewReplyWriteService();
+			  service.execute(request, response);
+			  viewPage = "ReviewListView.do";
+		  } else if(command.equals("/ReviewModifyView.do")) {  // 후기 게시판 수정 View 단
+			  service = new ReviewModifyViewService();
+			  service.execute(request, response);
+			  viewPage = "Review/ReviewModifyView.jsp";
+		  } else if(command.equals("/ReviewModify.do")) {   // 후기 게시판 수정 처리 단
+			  service = new ReviewModifyService();
+			  service.execute(request, response);
+			  viewPage = "ReviewContentView.do";
+		  } else if(command.equals("/ReviewDeleteView.do")) {  // 후기 게시판 삭제 재확인 View단
+			  service = new ReviewDeleteViewService();
+			  service.execute(request, response);
+			  viewPage = "Review/ReviewDeleteView.jsp";
+		  } else if(command.equals("/ReviewDelete.do")){  // 후기 게시판 삭제 처리 단
+			  service = new ReviewDeleteService();
+			  service.execute(request, response);
+			  viewPage = "ReviewListView.do";
 		  }
 		/*************************************************************************************************Review************************************************************/
 		/*************************************************************************************************Review************************************************************/

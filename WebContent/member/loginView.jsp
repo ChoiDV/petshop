@@ -34,7 +34,7 @@
         <div id="login_form">
             <form action="${conPath }/login.do" method="post"> 
                 <table>
-                    <caption><a href="../main/main.jsp">Companion</a></caption>
+                    <caption><a href="${conPath }/main.do">Companion</a></caption>
                     <tr>               
                         <td>
                            	<input type="text" name="mid" required="required" placeholder=" 아이디" value="${mid }${param.mid}">

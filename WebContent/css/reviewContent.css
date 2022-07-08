@@ -21,15 +21,15 @@
 }
 
 #wrap #top_bar span:first-child {
-	width: 295px;
+	width: 290px;
 }
 
 #wrap #top_bar span:nth-child(2) {
-	width: 595px;
+	width: 590px;
 }
 
 #wrap #top_bar span:nth-child(3) {
-	width: 295px;
+	width: 290px;
 }
 
 /*************/
@@ -71,7 +71,7 @@
 	
 }
 
-#wrap table tr:nth-child(3) {
+#wrap table tr:nth-child(3) {  
 	height: 300px;
 }
 
@@ -85,7 +85,7 @@
 	font-size: 1.3em;
 }
 
-#wrap table tr:nth-child(4) {
+#wrap table tr:nth-child(4) {   
 	height: 80px;
 	text-align: center;
 }

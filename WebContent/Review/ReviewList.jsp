@@ -10,7 +10,12 @@
   <title>Insert title here</title>
   <link href="${conPath }/css/Review.css" rel="stylesheet">
  <style>
- 
+ 	.left{text-align: left;}
+ 	.hot {
+		width:20px;
+		height:20px; 	
+ 	}
+ 	
  </style>
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
