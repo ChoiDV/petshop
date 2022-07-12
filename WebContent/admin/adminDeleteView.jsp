@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
   <title>Insert title here</title>
-  <link href="${conPath }/css/style.css" rel="stylesheet">
+  <link href="${conPath }/css/FreeBoard.css" rel="stylesheet">
  <style>
  
  </style>
@@ -21,7 +21,7 @@
 </head>
   <body>
   <jsp:include page="../main/header.jsp"/>
-  	
+  	<div id="allform">
 		<table>
 			<c:forEach var="admin" items="${adminList }">
 				<tr>
@@ -29,11 +29,12 @@
 					<td>관리자 아이디 : ${admin.aid }</td>
 					<td>관리자 비밀번호 : ${admin.apw }</td>
 					<td>
-						<button class="btn" onclick="location='${conPath}/adminDelete.do?aid=${admin.aid }'">추방</button>
+						<button class="btn" onclick="location='${conPath}/adminDelete.do?aid=${admin.aid }'" class="btn">추방</button>
 					</td>
 				</tr>				
 			</c:forEach>
 		</table>
+		</div>
 	<jsp:include page="../main/footer.jsp"/>
   </body>
 </html>

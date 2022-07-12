@@ -210,7 +210,7 @@
 						<td>${reply.rn } : </td>
 						<td>작성자 id : ${reply.mid } </td>
 						<td>${reply.reply_content }</td>
-						<td><fmt:formatDate value="${reply.rdate }" type="date" pattern="YY.MM.dd HH:mm"/></td>
+						<td><fmt:formatDate value="${reply.rdate }" type="date" pattern="YY.MM.dd"/></td>
 						<c:if test="${( member.mid eq reply.mid ) or not empty admin }">
 							<td>
 								<button onclick="location='${conPath }/modifyCatReplyView.do?rno=${reply.rno }&cnum=${catContent.cnum }&pageNum=${pageNum }'">수정</button>
